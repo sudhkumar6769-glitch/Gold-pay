@@ -3,104 +3,140 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GoldPay</title>
+<title>GoldPay Dashboard</title>
 
 <style>
 *{
+  box-sizing:border-box;
   margin:0;
   padding:0;
-  box-sizing:border-box;
   font-family:Arial,sans-serif;
 }
 
 body{
   background:#050505;
-  color:white;
+  color:#fff;
 }
 
 header{
+  height:65px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  padding:18px 6%;
+  justify-content:space-between;
+  padding:0 6%;
   border-bottom:1px solid #292929;
+  background:#080808;
   position:sticky;
   top:0;
-  background:#050505;
-  z-index:10;
+  z-index:20;
 }
 
 .logo{
+  color:#f5c542;
   font-size:25px;
   font-weight:bold;
-  color:#f5c542;
 }
 
-nav a{
-  color:white;
+.menu{
+  display:flex;
+  gap:20px;
+}
+
+.menu a{
+  color:#ddd;
   text-decoration:none;
-  margin-left:20px;
   cursor:pointer;
+}
+
+.menu a:hover{
+  color:#f5c542;
 }
 
 .hero{
-  min-height:80vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:30px;
+  padding:55px 6% 30px;
 }
 
 .hero h1{
-  font-size:55px;
+  font-size:38px;
   color:#f5c542;
-  margin-bottom:15px;
+  margin-bottom:10px;
 }
 
 .hero p{
-  color:#bbb;
-  max-width:600px;
-  line-height:1.7;
+  color:#999;
 }
 
-.btn{
-  display:inline-block;
-  margin:25px 8px;
-  padding:13px 25px;
-  border-radius:8px;
-  border:1px solid #f5c542;
-  background:#f5c542;
-  color:#000;
-  font-weight:bold;
-  text-decoration:none;
-  cursor:pointer;
-}
-
-.btn.dark{
-  background:transparent;
-  color:#f5c542;
-}
-
-section{
-  padding:60px 6%;
-}
-
-.title{
-  text-align:center;
-  color:#f5c542;
-  margin-bottom:35px;
-  font-size:32px;
+.dashboard{
+  padding:20px 6%;
 }
 
 .cards{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:20px;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
 }
 
 .card{
+  background:#101010;
+  border:1px solid #292929;
+  border-radius:15px;
+  padding:24px;
+}
+
+.card h3{
+  color:#aaa;
+  font-size:15px;
+  margin-bottom:12px;
+}
+
+.amount{
+  color:#f5c542;
+  font-size:28px;
+  font-weight:bold;
+}
+
+.section{
+  padding:50px 6%;
+}
+
+.title{
+  color:#f5c542;
+  font-size:28px;
+  margin-bottom:25px;
+}
+
+.actions{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:15px;
+}
+
+.btn{
+  border:1px solid #f5c542;
+  background:#f5c542;
+  color:#000;
+  padding:14px;
+  border-radius:9px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.btn.dark{
+  background:#101010;
+  color:#f5c542;
+}
+
+.btn:hover{
+  opacity:.85;
+}
+
+.game-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:18px;
+}
+
+.game{
   background:#101010;
   border:1px solid #292929;
   border-radius:15px;
@@ -108,66 +144,67 @@ section{
   text-align:center;
 }
 
-.card h3{
-  color:#f5c542;
+.game-icon{
+  font-size:45px;
   margin-bottom:12px;
 }
 
-.card p{
-  color:#aaa;
-  line-height:1.6;
+.game h3{
+  color:#f5c542;
+  margin-bottom:8px;
 }
 
-.game{
-  font-size:45px;
-  margin-bottom:15px;
+.game p{
+  color:#999;
+  font-size:14px;
+  line-height:1.5;
+  margin-bottom:18px;
 }
 
-footer{
-  text-align:center;
-  padding:30px;
-  border-top:1px solid #292929;
-  color:#777;
-}
-
-.login-box{
-  max-width:400px;
+.login{
+  max-width:420px;
   margin:auto;
   background:#101010;
   padding:30px;
-  border-radius:15px;
   border:1px solid #292929;
+  border-radius:15px;
 }
 
 input{
   width:100%;
   padding:14px;
-  margin:8px 0;
+  margin-bottom:12px;
   background:#050505;
-  color:white;
   border:1px solid #333;
+  color:white;
   border-radius:8px;
 }
 
-.login-box .btn{
-  width:100%;
-  margin:15px 0 0;
-}
-
-#message{
-  text-align:center;
+.message{
   color:#f5c542;
+  text-align:center;
   margin-top:15px;
 }
 
+footer{
+  margin-top:40px;
+  padding:30px;
+  text-align:center;
+  color:#666;
+  border-top:1px solid #292929;
+}
+
 @media(max-width:600px){
-  .hero h1{
-    font-size:42px;
+  .menu{
+    gap:9px;
   }
 
-  nav a{
-    margin-left:8px;
-    font-size:13px;
+  .menu a{
+    font-size:12px;
+  }
+
+  .hero h1{
+    font-size:30px;
   }
 }
 </style>
@@ -176,61 +213,52 @@ input{
 <body>
 
 <header>
+
   <div class="logo">GOLDPAY</div>
 
-  <nav>
-    <a href="#home">Home</a>
+  <div class="menu">
+    <a href="#dashboard">Dashboard</a>
+    <a href="#investment">Investment</a>
     <a href="#games">Games</a>
     <a href="#login">Login</a>
-  </nav>
+  </div>
+
 </header>
 
 
-<section class="hero" id="home">
+<!-- DASHBOARD -->
 
-  <h1>GOLDPAY</h1>
+<section class="hero" id="dashboard">
 
-  <p>
-    Welcome to GoldPay — a modern digital platform with
-    investment tools and interactive games.
-  </p>
+  <h1>Welcome to GoldPay</h1>
 
-  <div>
-    <a href="#login" class="btn">Login</a>
-    <a href="#games" class="btn dark">Explore Games</a>
-  </div>
+  <p>Your digital finance dashboard.</p>
 
 </section>
 
 
-<section>
-
-  <h2 class="title">GoldPay Features</h2>
+<section class="dashboard">
 
   <div class="cards">
 
     <div class="card">
-      <h3>💰 Investment</h3>
-      <p>
-        Investment dashboard and account management
-        will be added in the secure backend.
-      </p>
+      <h3>Available Balance</h3>
+      <div class="amount">₹0.00</div>
     </div>
 
     <div class="card">
-      <h3>🔐 Secure Account</h3>
-      <p>
-        User accounts and secure authentication will
-        be connected later.
-      </p>
+      <h3>Total Investment</h3>
+      <div class="amount">₹0.00</div>
     </div>
 
     <div class="card">
-      <h3>🎮 Games</h3>
-      <p>
-        Six different interactive games are planned
-        for GoldPay.
-      </p>
+      <h3>Total Earnings</h3>
+      <div class="amount">₹0.00</div>
+    </div>
+
+    <div class="card">
+      <h3>Game Points</h3>
+      <div class="amount">0</div>
     </div>
 
   </div>
@@ -238,64 +266,202 @@ input{
 </section>
 
 
-<section id="games">
+<!-- ACTIONS -->
+
+<section class="section">
+
+  <h2 class="title">Quick Actions</h2>
+
+  <div class="actions">
+
+    <button class="btn" onclick="demoMessage('Deposit')">
+      💳 Deposit
+    </button>
+
+    <button class="btn dark" onclick="demoMessage('Withdraw')">
+      💸 Withdraw
+    </button>
+
+    <button class="btn dark" onclick="demoMessage('Transaction History')">
+      📊 Transactions
+    </button>
+
+    <button class="btn dark" onclick="demoMessage('Profile')">
+      👤 Profile
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- INVESTMENT -->
+
+<section class="section" id="investment">
+
+  <h2 class="title">Investment Plans</h2>
+
+  <div class="cards">
+
+    <div class="card">
+
+      <h3>Starter</h3>
+
+      <p>
+        Demo investment plan for testing the interface.
+      </p>
+
+      <button class="btn" onclick="demoMessage('Starter Plan')">
+        View Plan
+      </button>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>Growth</h3>
+
+      <p>
+        Demo plan. Actual investment terms will require
+        proper backend and regulatory setup.
+      </p>
+
+      <button class="btn" onclick="demoMessage('Growth Plan')">
+        View Plan
+      </button>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>Premium</h3>
+
+      <p>
+        Demo interface only. No guaranteed returns are
+        displayed.
+      </p>
+
+      <button class="btn" onclick="demoMessage('Premium Plan')">
+        View Plan
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- GAMES -->
+
+<section class="section" id="games">
 
   <h2 class="title">GoldPay Games</h2>
 
-  <div class="cards">
+  <div class="game-grid">
 
-    <div class="card">
-      <div class="game">🏎️</div>
+
+    <div class="game">
+
+      <div class="game-icon">🏎️</div>
+
       <h3>GoldPay Racing</h3>
-      <p>Race through different tracks and levels.</p>
-      <button class="btn dark" onclick="startGame('GoldPay Racing')">
-        Play
+
+      <p>
+        Race through different tracks and levels.
+      </p>
+
+      <button class="btn" onclick="playGame('GoldPay Racing')">
+        PLAY
       </button>
+
     </div>
 
-    <div class="card">
-      <div class="game">🥊</div>
+
+    <div class="game">
+
+      <div class="game-icon">🥊</div>
+
       <h3>GoldPay Fight</h3>
-      <p>1 vs 1 fighting with attack and defense.</p>
-      <button class="btn dark" onclick="startGame('GoldPay Fight')">
-        Play
+
+      <p>
+        Original 1 vs 1 fighting game.
+      </p>
+
+      <button class="btn" onclick="playGame('GoldPay Fight')">
+        PLAY
       </button>
+
     </div>
 
-    <div class="card">
-      <div class="game">⚔️</div>
+
+    <div class="game">
+
+      <div class="game-icon">⚔️</div>
+
       <h3>Battle Arena</h3>
-      <p>Fight enemies and complete challenging levels.</p>
-      <button class="btn dark" onclick="startGame('Battle Arena')">
-        Play
+
+      <p>
+        Defeat enemies and complete levels.
+      </p>
+
+      <button class="btn" onclick="playGame('Battle Arena')">
+        PLAY
       </button>
+
     </div>
 
-    <div class="card">
-      <div class="game">🧟</div>
+
+    <div class="game">
+
+      <div class="game-icon">🧟</div>
+
       <h3>Zombie Survival</h3>
-      <p>Survive waves of enemies and increase your score.</p>
-      <button class="btn dark" onclick="startGame('Zombie Survival')">
-        Play
+
+      <p>
+        Survive increasingly difficult waves.
+      </p>
+
+      <button class="btn" onclick="playGame('Zombie Survival')">
+        PLAY
       </button>
+
     </div>
 
-    <div class="card">
-      <div class="game">🏰</div>
+
+    <div class="game">
+
+      <div class="game-icon">🏰</div>
+
       <h3>Tower Defense</h3>
-      <p>Defend your base and upgrade your towers.</p>
-      <button class="btn dark" onclick="startGame('Tower Defense')">
-        Play
+
+      <p>
+        Defend your base and upgrade towers.
+      </p>
+
+      <button class="btn" onclick="playGame('Tower Defense')">
+        PLAY
       </button>
+
     </div>
 
-    <div class="card">
-      <div class="game">🧩</div>
+
+    <div class="game">
+
+      <div class="game-icon">🧩</div>
+
       <h3>Cyber Puzzle</h3>
-      <p>Solve difficult puzzles against the clock.</p>
-      <button class="btn dark" onclick="startGame('Cyber Puzzle')">
-        Play
+
+      <p>
+        Solve difficult puzzles before time runs out.
+      </p>
+
+      <button class="btn" onclick="playGame('Cyber Puzzle')">
+        PLAY
       </button>
+
     </div>
 
   </div>
@@ -303,21 +469,31 @@ input{
 </section>
 
 
-<section id="login">
+<!-- LOGIN -->
 
-  <h2 class="title">GoldPay Login</h2>
+<section class="section" id="login">
 
-  <div class="login-box">
+  <h2 class="title">User Login</h2>
 
-    <input type="text" id="username" placeholder="Username">
+  <div class="login">
 
-    <input type="password" id="password" placeholder="Password">
+    <input
+      type="text"
+      id="username"
+      placeholder="Username"
+    >
+
+    <input
+      type="password"
+      id="password"
+      placeholder="Password"
+    >
 
     <button class="btn" onclick="loginUser()">
-      Login
+      LOGIN
     </button>
 
-    <div id="message"></div>
+    <div class="message" id="message"></div>
 
   </div>
 
@@ -325,20 +501,33 @@ input{
 
 
 <footer>
-  © 2026 GoldPay. Demo platform.
+
+  © 2026 GoldPay — Demo Platform
+
 </footer>
 
 
 <script>
 
-function startGame(gameName){
+function demoMessage(name){
 
   alert(
-    gameName +
-    " selected! Full playable game will be added in the next step."
+    name +
+    " section selected. Secure backend will be connected later."
   );
 
 }
+
+
+function playGame(name){
+
+  alert(
+    name +
+    " selected. The full playable version will be built next."
+  );
+
+}
+
 
 function loginUser(){
 
@@ -348,20 +537,26 @@ function loginUser(){
   let password =
     document.getElementById("password").value;
 
+  let message =
+    document.getElementById("message");
+
+
   if(username === "" || password === ""){
 
-    document.getElementById("message").innerText =
+    message.innerText =
       "Please enter username and password.";
 
     return;
+
   }
 
-  document.getElementById("message").innerText =
-    "Demo login successful: " + username;
+
+  message.innerText =
+    "Demo login successful for " + username;
 
 }
 
 </script>
 
 </body>
-  </html>
+</html>
