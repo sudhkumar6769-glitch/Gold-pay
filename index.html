@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoldPay</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#050505;
+  color:white;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 6%;
+  border-bottom:1px solid #292929;
+  position:sticky;
+  top:0;
+  background:#050505;
+  z-index:10;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:bold;
+  color:#f5c542;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:20px;
+  cursor:pointer;
+}
+
+.hero{
+  min-height:80vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:30px;
+}
+
+.hero h1{
+  font-size:55px;
+  color:#f5c542;
+  margin-bottom:15px;
+}
+
+.hero p{
+  color:#bbb;
+  max-width:600px;
+  line-height:1.7;
+}
+
+.btn{
+  display:inline-block;
+  margin:25px 8px;
+  padding:13px 25px;
+  border-radius:8px;
+  border:1px solid #f5c542;
+  background:#f5c542;
+  color:#000;
+  font-weight:bold;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+.btn.dark{
+  background:transparent;
+  color:#f5c542;
+}
+
+section{
+  padding:60px 6%;
+}
+
+.title{
+  text-align:center;
+  color:#f5c542;
+  margin-bottom:35px;
+  font-size:32px;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:#101010;
+  border:1px solid #292929;
+  border-radius:15px;
+  padding:25px;
+  text-align:center;
+}
+
+.card h3{
+  color:#f5c542;
+  margin-bottom:12px;
+}
+
+.card p{
+  color:#aaa;
+  line-height:1.6;
+}
+
+.game{
+  font-size:45px;
+  margin-bottom:15px;
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+  border-top:1px solid #292929;
+  color:#777;
+}
+
+.login-box{
+  max-width:400px;
+  margin:auto;
+  background:#101010;
+  padding:30px;
+  border-radius:15px;
+  border:1px solid #292929;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  margin:8px 0;
+  background:#050505;
+  color:white;
+  border:1px solid #333;
+  border-radius:8px;
+}
+
+.login-box .btn{
+  width:100%;
+  margin:15px 0 0;
+}
+
+#message{
+  text-align:center;
+  color:#f5c542;
+  margin-top:15px;
+}
+
+@media(max-width:600px){
+  .hero h1{
+    font-size:42px;
+  }
+
+  nav a{
+    margin-left:8px;
+    font-size:13px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">GOLDPAY</div>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#games">Games</a>
+    <a href="#login">Login</a>
+  </nav>
+</header>
+
+
+<section class="hero" id="home">
+
+  <h1>GOLDPAY</h1>
+
+  <p>
+    Welcome to GoldPay — a modern digital platform with
+    investment tools and interactive games.
+  </p>
+
+  <div>
+    <a href="#login" class="btn">Login</a>
+    <a href="#games" class="btn dark">Explore Games</a>
+  </div>
+
+</section>
+
+
+<section>
+
+  <h2 class="title">GoldPay Features</h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>💰 Investment</h3>
+      <p>
+        Investment dashboard and account management
+        will be added in the secure backend.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>🔐 Secure Account</h3>
+      <p>
+        User accounts and secure authentication will
+        be connected later.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>🎮 Games</h3>
+      <p>
+        Six different interactive games are planned
+        for GoldPay.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="games">
+
+  <h2 class="title">GoldPay Games</h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="game">🏎️</div>
+      <h3>GoldPay Racing</h3>
+      <p>Race through different tracks and levels.</p>
+      <button class="btn dark" onclick="startGame('GoldPay Racing')">
+        Play
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="game">🥊</div>
+      <h3>GoldPay Fight</h3>
+      <p>1 vs 1 fighting with attack and defense.</p>
+      <button class="btn dark" onclick="startGame('GoldPay Fight')">
+        Play
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="game">⚔️</div>
+      <h3>Battle Arena</h3>
+      <p>Fight enemies and complete challenging levels.</p>
+      <button class="btn dark" onclick="startGame('Battle Arena')">
+        Play
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="game">🧟</div>
+      <h3>Zombie Survival</h3>
+      <p>Survive waves of enemies and increase your score.</p>
+      <button class="btn dark" onclick="startGame('Zombie Survival')">
+        Play
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="game">🏰</div>
+      <h3>Tower Defense</h3>
+      <p>Defend your base and upgrade your towers.</p>
+      <button class="btn dark" onclick="startGame('Tower Defense')">
+        Play
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="game">🧩</div>
+      <h3>Cyber Puzzle</h3>
+      <p>Solve difficult puzzles against the clock.</p>
+      <button class="btn dark" onclick="startGame('Cyber Puzzle')">
+        Play
+      </button>
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="login">
+
+  <h2 class="title">GoldPay Login</h2>
+
+  <div class="login-box">
+
+    <input type="text" id="username" placeholder="Username">
+
+    <input type="password" id="password" placeholder="Password">
+
+    <button class="btn" onclick="loginUser()">
+      Login
+    </button>
+
+    <div id="message"></div>
+
+  </div>
+
+</section>
+
+
+<footer>
+  © 2026 GoldPay. Demo platform.
+</footer>
+
+
+<script>
+
+function startGame(gameName){
+
+  alert(
+    gameName +
+    " selected! Full playable game will be added in the next step."
+  );
+
+}
+
+function loginUser(){
+
+  let username =
+    document.getElementById("username").value;
+
+  let password =
+    document.getElementById("password").value;
+
+  if(username === "" || password === ""){
+
+    document.getElementById("message").innerText =
+      "Please enter username and password.";
+
+    return;
+  }
+
+  document.getElementById("message").innerText =
+    "Demo login successful: " + username;
+
+}
+
+</script>
+
+</body>
+  </html>
