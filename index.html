@@ -2,271 +2,547 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>GoldPay</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoldPay — Digital Finance Platform</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
 :root{
- --bg:#050505;--card:#101010;--card2:#151515;
- --gold:#d9a441;--gold2:#ffe39a;--text:#fff;--muted:#8d8d8d;
- --border:rgba(217,164,65,.20);--green:#55d98b;--red:#ff5d67
+  --gold:#d7a52b;
+  --gold2:#f4cf67;
+  --black:#070707;
+  --card:#111111;
+  --text:#f5f5f5;
+  --muted:#999;
+  --line:#262626;
 }
+
+html{scroll-behavior:smooth}
+
 body{
- font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);
- min-height:100vh
+  background:
+    radial-gradient(circle at 80% 5%,rgba(215,165,43,.13),transparent 28%),
+    #050505;
+  color:var(--text);
+  min-height:100vh;
 }
-button,input{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
+
+a{text-decoration:none;color:inherit}
+
+.container{
+  width:min(1120px,92%);
+  margin:auto;
+}
 
 /* HEADER */
 header{
- position:sticky;top:0;z-index:100;
- background:rgba(5,5,5,.94);backdrop-filter:blur(15px);
- border-bottom:1px solid #222
+  position:sticky;
+  top:0;
+  z-index:1000;
+  backdrop-filter:blur(16px);
+  background:rgba(5,5,5,.88);
+  border-bottom:1px solid #202020;
 }
-.nav{
- max-width:1200px;margin:auto;height:68px;padding:0 18px;
- display:flex;align-items:center;justify-content:space-between
-}
-.logo{font-size:23px;font-weight:900;letter-spacing:-1px}
-.logo span{color:var(--gold2)}
-.navlinks{display:flex;gap:22px}
-.navlinks button{
- background:none;border:0;color:#aaa;font-size:14px
-}
-.navlinks button:hover{color:#fff}
-.navright{display:flex;gap:8px}
-.btn{
- border:0;border-radius:10px;padding:11px 17px;font-weight:700
-}
-.gold{
- color:#090909;
- background:linear-gradient(135deg,#b8862f,#ffe49a,#c69535)
-}
-.dark{
- color:#fff;background:#151515;border:1px solid #292929
-}
-.menu{display:none;font-size:25px}
 
-/* PAGES */
-.page{max-width:1200px;margin:auto;padding:35px 18px 80px}
-.home{padding-top:75px}
+.nav{
+  height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:-1px;
+}
+
+.logo span{color:var(--gold2)}
+
+.navlinks{
+  display:flex;
+  gap:28px;
+  color:#aaa;
+  font-size:14px;
+}
+
+.navlinks a:hover{color:white}
+
+.navbuttons{
+  display:flex;
+  gap:10px;
+}
+
+.btn{
+  border:1px solid #353535;
+  background:#121212;
+  color:white;
+  padding:11px 17px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  border-color:var(--gold);
+}
+
+.btn.gold{
+  background:linear-gradient(135deg,#c49320,#f1c957);
+  color:#080808;
+  border:none;
+  font-weight:bold;
+}
+
+.menu{
+  display:none;
+  font-size:25px;
+  cursor:pointer;
+}
 
 /* HERO */
 .hero{
- display:grid;grid-template-columns:1.1fr .9fr;gap:50px;
- align-items:center;min-height:620px
+  padding:100px 0 80px;
+  text-align:center;
 }
-.badge{
- display:inline-block;padding:7px 12px;border-radius:30px;
- border:1px solid var(--border);color:var(--gold2);
- background:rgba(217,164,65,.07);font-size:11px
-}
-.hero h1{
- font-size:clamp(48px,7vw,82px);line-height:.98;
- margin-top:22px;letter-spacing:-4px
-}
-.hero h1 span{
- color:var(--gold2)
-}
-.hero p{
- color:#888;line-height:1.8;max-width:550px;margin-top:22px
-}
-.actions{display:flex;gap:10px;margin-top:28px}
-.stats{display:flex;gap:35px;margin-top:40px}
-.stat b{font-size:23px;display:block}
-.stat small{color:#777}
 
-/* HERO CARD */
-.heroCard{
- border:1px solid var(--border);border-radius:28px;padding:25px;
- background:linear-gradient(145deg,#151515,#090909);
- box-shadow:0 25px 80px #000
+.badge{
+  display:inline-flex;
+  border:1px solid #443817;
+  background:#151107;
+  color:var(--gold2);
+  padding:8px 14px;
+  border-radius:30px;
+  font-size:12px;
+  margin-bottom:22px;
 }
-.cardtop{display:flex;justify-content:space-between;color:#777;font-size:12px}
-.balance{margin-top:55px}
-.balance small{color:#777}
-.balance h2{font-size:44px;margin-top:7px}
-.green{color:var(--green)}
-.chart{
- height:170px;display:flex;align-items:end;gap:7px;margin-top:25px
+
+.hero h1{
+  font-size:clamp(42px,7vw,76px);
+  line-height:1;
+  letter-spacing:-4px;
+  max-width:850px;
+  margin:auto;
 }
-.bar{
- flex:1;border-radius:5px 5px 1px 1px;
- background:linear-gradient(#ffe39a,#8c641f)
+
+.hero h1 span{
+  color:var(--gold2);
 }
-.b1{height:30%}.b2{height:45%}.b3{height:38%}.b4{height:55%}
-.b5{height:48%}.b6{height:70%}.b7{height:62%}.b8{height:82%}.b9{height:74%}
-.minirow{display:flex;gap:10px;margin-top:20px}
-.mini{
- flex:1;background:#141414;border:1px solid #252525;border-radius:12px;padding:13px
+
+.hero p{
+  max-width:650px;
+  margin:25px auto;
+  color:#999;
+  line-height:1.7;
 }
-.mini small{color:#777}.mini b{display:block;margin-top:5px}
+
+.hero-buttons{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin-top:65px;
+}
+
+.stat{
+  background:linear-gradient(145deg,#121212,#0b0b0b);
+  border:1px solid var(--line);
+  padding:25px;
+  border-radius:18px;
+}
+
+.stat strong{
+  display:block;
+  font-size:27px;
+  color:var(--gold2);
+  margin-bottom:6px;
+}
+
+.stat span{
+  color:#888;
+  font-size:13px;
+}
 
 /* SECTION */
-.section{margin-top:30px}
-.title{text-align:center;margin-bottom:30px}
-.title small{color:var(--gold2);letter-spacing:3px}
-.title h2{font-size:36px;margin-top:8px}
-.title p{color:#777;margin-top:9px}
+section{
+  padding:85px 0;
+}
 
-/* CARDS */
-.grid3{
- display:grid;grid-template-columns:repeat(3,1fr);gap:15px
+.section-title{
+  text-align:center;
+  margin-bottom:45px;
 }
-.card{
- background:linear-gradient(145deg,#131313,#0b0b0b);
- border:1px solid #222;border-radius:20px;padding:23px;
- transition:.25s
+
+.section-title small{
+  color:var(--gold2);
+  letter-spacing:2px;
 }
-.card:hover{transform:translateY(-4px);border-color:var(--border)}
-.icon{font-size:35px}
-.card h3{margin-top:15px}
-.card p{color:#777;line-height:1.6;font-size:13px;margin-top:8px}
+
+.section-title h2{
+  font-size:40px;
+  margin:10px 0;
+}
+
+.section-title p{
+  color:#888;
+}
+
+/* FEATURES */
+.features{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+
+.feature{
+  background:#0e0e0e;
+  border:1px solid var(--line);
+  padding:25px;
+  border-radius:18px;
+  transition:.3s;
+}
+
+.feature:hover{
+  transform:translateY(-6px);
+  border-color:#5b471b;
+}
+
+.icon{
+  width:45px;
+  height:45px;
+  border-radius:12px;
+  background:#1c1609;
+  display:grid;
+  place-items:center;
+  font-size:21px;
+  margin-bottom:18px;
+}
+
+.feature h3{
+  margin-bottom:10px;
+}
+
+.feature p{
+  color:#858585;
+  font-size:14px;
+  line-height:1.6;
+}
+
+/* CALCULATOR */
+.calculator{
+  max-width:700px;
+  margin:auto;
+  background:#0d0d0d;
+  border:1px solid #292929;
+  padding:30px;
+  border-radius:22px;
+}
+
+.inputbox{
+  margin-bottom:18px;
+}
+
+.inputbox label{
+  display:block;
+  color:#999;
+  font-size:13px;
+  margin-bottom:8px;
+}
+
+.inputbox input{
+  width:100%;
+  padding:16px;
+  border-radius:12px;
+  border:1px solid #303030;
+  background:#151515;
+  color:white;
+  outline:none;
+  font-size:17px;
+}
+
+.inputbox input:focus{
+  border-color:var(--gold);
+}
+
+.result{
+  margin-top:20px;
+  padding:22px;
+  background:#161206;
+  border:1px solid #493a18;
+  border-radius:15px;
+  text-align:center;
+}
+
+.result small{color:#999}
+
+.result strong{
+  display:block;
+  color:var(--gold2);
+  font-size:32px;
+  margin-top:6px;
+}
+
+/* STEPS */
+.steps{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.step{
+  position:relative;
+  padding:25px;
+  background:#0e0e0e;
+  border:1px solid #242424;
+  border-radius:18px;
+}
+
+.number{
+  color:var(--gold2);
+  font-size:13px;
+  margin-bottom:20px;
+}
+
+.step p{
+  color:#888;
+  line-height:1.6;
+  margin-top:8px;
+  font-size:14px;
+}
 
 /* DASHBOARD */
-.dashboardHead{
- display:flex;justify-content:space-between;align-items:center;gap:15px
+.dashboard{
+  display:grid;
+  grid-template-columns:1.5fr 1fr;
+  gap:20px;
 }
-.dashboardHead h1{font-size:32px}
-.muted{color:#777}
-.balanceBox{
- margin-top:20px;padding:25px;border-radius:20px;
- background:linear-gradient(135deg,#17130a,#0d0d0d);
- border:1px solid var(--border)
+
+.dash-card{
+  background:#0e0e0e;
+  border:1px solid #292929;
+  border-radius:20px;
+  padding:28px;
 }
-.balanceBox small{color:#888}
-.balanceBox h2{font-size:40px;margin-top:8px;color:var(--gold2)}
-.actionGrid{
- display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:15px
+
+.balance{
+  font-size:38px;
+  color:var(--gold2);
+  margin:12px 0;
 }
+
+.actions{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:25px;
+}
+
 .action{
- padding:17px;border:1px solid #222;background:#101010;
- border-radius:14px;color:white;text-align:center
-}
-.action:hover{border-color:var(--border)}
-.transactions{
- margin-top:20px;background:#0d0d0d;border:1px solid #222;
- border-radius:18px;padding:20px
-}
-.tx{
- display:flex;justify-content:space-between;padding:14px 0;
- border-bottom:1px solid #1d1d1d
-}
-.tx:last-child{border:0}
-.tx small{display:block;color:#777;margin-top:3px}
-
-/* GAMES */
-.gameGrid{
- display:grid;grid-template-columns:repeat(3,1fr);gap:15px
-}
-.gameCard{
- min-height:210px;padding:22px;border-radius:20px;
- background:linear-gradient(145deg,#171717,#090909);
- border:1px solid #242424;position:relative;overflow:hidden
-}
-.gameCard:hover{border-color:var(--gold);transform:translateY(-4px)}
-.gameIcon{font-size:48px}
-.gameCard h3{margin-top:12px}
-.gameCard p{color:#777;font-size:12px;margin-top:6px;line-height:1.5}
-.play{
- position:absolute;bottom:20px;left:20px;
- padding:9px 15px;border:0;border-radius:9px;
- background:var(--gold);font-weight:bold
+  padding:15px;
+  text-align:center;
+  border-radius:12px;
+  background:#171717;
+  border:1px solid #292929;
+  cursor:pointer;
 }
 
-/* GAME SCREEN */
-.gameScreen{text-align:center}
-.gameHeader{
- display:flex;justify-content:space-between;align-items:center;
- margin-bottom:18px
-}
-.gameBox{
- min-height:450px;padding:25px;border:1px solid #242424;
- border-radius:22px;background:#0d0d0d
-}
-.gameStats{
- display:flex;justify-content:center;gap:25px;margin:15px 0
-}
-.gameStats b{color:var(--gold2)}
-.gameButtons{
- display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:25px
-}
-.gameButtons button{
- min-width:90px;padding:13px;border-radius:10px;
- border:1px solid #333;background:#181818;color:white
-}
-.gameButtons button:hover{border-color:var(--gold)}
-.arena{
- position:relative;height:260px;margin:20px auto;
- max-width:650px;border:1px solid #292929;border-radius:15px;
- background:radial-gradient(circle,#1d170a,#080808)
-}
-.player,.enemy{
- position:absolute;font-size:55px;top:95px;transition:.2s
-}
-.player{left:22%}.enemy{right:22%}
-.hp{
- position:absolute;top:20px;width:28%;height:10px;
- background:#222;border-radius:20px;overflow:hidden
-}
-.hp div{height:100%;background:#55d98b;width:100%}
-.hp1{left:8%}.hp2{right:8%}
-
-/* FORMS */
-.formBox{
- max-width:430px;margin:50px auto;padding:28px;
- background:#101010;border:1px solid #272727;border-radius:20px
-}
-.formBox h1{font-size:30px}
-.input{
- width:100%;padding:14px;margin-top:12px;
- background:#080808;border:1px solid #292929;
- border-radius:10px;color:white;outline:none
-}
-.input:focus{border-color:var(--gold)}
-.full{width:100%;margin-top:14px}
-.formBox p{color:#777;font-size:13px;margin-top:8px}
-.link{
- color:var(--gold2);cursor:pointer
+.action:hover{
+  border-color:var(--gold);
 }
 
-/* PROFILE */
-.profile{
- max-width:700px;margin:auto
+/* FAQ */
+.faq{
+  max-width:800px;
+  margin:auto;
 }
-.profileCard{
- padding:25px;background:#101010;border:1px solid #222;border-radius:20px
+
+details{
+  background:#0e0e0e;
+  border:1px solid #262626;
+  padding:20px;
+  border-radius:14px;
+  margin-bottom:10px;
 }
-.profileRow{
- display:flex;justify-content:space-between;padding:15px 0;
- border-bottom:1px solid #222
+
+summary{
+  cursor:pointer;
+  font-weight:bold;
+}
+
+details p{
+  color:#888;
+  line-height:1.6;
+  padding-top:15px;
+}
+
+/* LOGIN MODAL */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:3000;
+  background:rgba(0,0,0,.8);
+  backdrop-filter:blur(8px);
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal.active{display:flex}
+
+.modalbox{
+  width:min(420px,100%);
+  background:#0d0d0d;
+  border:1px solid #343434;
+  border-radius:22px;
+  padding:30px;
+  position:relative;
+}
+
+.close{
+  position:absolute;
+  right:20px;
+  top:17px;
+  cursor:pointer;
+  color:#888;
+  font-size:22px;
+}
+
+.modalbox h2{
+  margin-bottom:7px;
+}
+
+.modalbox p{
+  color:#777;
+  font-size:13px;
+  margin-bottom:22px;
+}
+
+.form input{
+  width:100%;
+  padding:14px;
+  margin-bottom:12px;
+  background:#151515;
+  color:white;
+  border:1px solid #303030;
+  border-radius:10px;
+  outline:none;
+}
+
+.form button{
+  width:100%;
+  margin-top:5px;
 }
 
 /* FOOTER */
 footer{
- border-top:1px solid #191919;padding:30px 18px;color:#666;text-align:center;
- font-size:12px
+  border-top:1px solid #202020;
+  padding:40px 0;
+  color:#777;
+  text-align:center;
+}
+
+.footer-logo{
+  font-size:23px;
+  color:white;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.footer-logo span{color:var(--gold2)}
+
+.notice{
+  margin-top:20px;
+  font-size:11px;
+  color:#555;
+  max-width:700px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* TOAST */
+.toast{
+  position:fixed;
+  bottom:25px;
+  right:20px;
+  background:#171717;
+  border:1px solid #493a18;
+  color:white;
+  padding:15px 18px;
+  border-radius:12px;
+  transform:translateY(100px);
+  opacity:0;
+  transition:.3s;
+  z-index:5000;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
 }
 
 /* MOBILE */
-@media(max-width:850px){
- .navlinks{display:none}
- .navright{display:none}
- .menu{display:block}
- .hero{grid-template-columns:1fr;padding-top:20px}
- .grid3,.gameGrid{grid-template-columns:1fr}
- .actionGrid{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:500px){
- .page{padding-left:14px;padding-right:14px}
- .hero h1{font-size:50px}
- .stats{justify-content:space-between;gap:10px}
- .actionGrid{grid-template-columns:1fr 1fr}
- .dashboardHead{align-items:flex-start;flex-direction:column}
- .gameStats{gap:13px}
+@media(max-width:800px){
+
+  .navlinks,.navbuttons{
+    display:none;
+  }
+
+  .menu{
+    display:block;
+  }
+
+  .nav.mobile-open{
+    position:relative;
+  }
+
+  .nav.mobile-open .navlinks{
+    display:flex;
+    position:absolute;
+    top:72px;
+    left:0;
+    right:0;
+    background:#090909;
+    padding:20px;
+    flex-direction:column;
+    border-bottom:1px solid #222;
+  }
+
+  .hero{
+    padding:75px 0 55px;
+  }
+
+  .hero h1{
+    letter-spacing:-2px;
+  }
+
+  .stats,
+  .features,
+  .steps,
+  .dashboard{
+    grid-template-columns:1fr;
+  }
+
+  .actions{
+    grid-template-columns:1fr;
+  }
+
+  .section-title h2{
+    font-size:32px;
+  }
 }
 </style>
 </head>
@@ -274,1119 +550,573 @@ footer{
 <body>
 
 <header>
-<div class="nav">
+  <div class="container nav" id="nav">
 
- <div class="logo">GOLD<span>PAY</span></div>
+    <a href="#" class="logo">
+      Gold<span>Pay</span>
+    </a>
 
- <div class="navlinks">
-  <button onclick="showPage('home')">Home</button>
-  <button onclick="showPage('dashboard')">Dashboard</button>
-  <button onclick="showPage('games')">Games</button>
-  <button onclick="showPage('profile')">Profile</button>
- </div>
+    <div class="navlinks">
+      <a href="#features">Features</a>
+      <a href="#calculator">Calculator</a>
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+    </div>
 
- <div class="navright">
-  <button class="btn dark" onclick="showPage('login')">Login</button>
-  <button class="btn gold" onclick="showPage('signup')">Sign Up</button>
- </div>
+    <div class="navbuttons">
+      <button class="btn" onclick="openLogin()">Login</button>
+      <button class="btn gold" onclick="openSignup()">Create Account</button>
+    </div>
 
- <div class="menu" onclick="showPage('dashboard')">☰</div>
-</div>
+    <div class="menu" onclick="toggleMenu()">☰</div>
+
+  </div>
 </header>
 
 
-<!-- HOME -->
-<div id="home" class="page home">
+<main>
 
+<!-- HERO -->
 <section class="hero">
+<div class="container">
 
- <div>
-  <span class="badge">✦ GOLDPAY DIGITAL PLATFORM</span>
+  <div class="badge">● GOLDPAY DIGITAL PLATFORM</div>
 
   <h1>
-   Build.<br>
-   <span>Grow.</span><br>
-   Play.
+    Manage Your Money.
+    <span>Smarter.</span>
   </h1>
 
   <p>
-   A premium digital platform combining financial tools,
-   account management and a dedicated gaming experience.
+    GoldPay brings account management, digital transactions,
+    tracking tools and a premium dashboard together in one simple experience.
   </p>
 
-  <div class="actions">
-   <button class="btn gold" onclick="showPage('signup')">
-    Get Started →
-   </button>
-   <button class="btn dark" onclick="showPage('games')">
-    Explore Games
-   </button>
+  <div class="hero-buttons">
+    <button class="btn gold" onclick="openSignup()">
+      Get Started →
+    </button>
+
+    <button class="btn" onclick="document.getElementById('features').scrollIntoView()">
+      Explore Platform
+    </button>
   </div>
+
 
   <div class="stats">
-   <div class="stat"><b>06</b><small>Games</small></div>
-   <div class="stat"><b>24/7</b><small>Dashboard</small></div>
-   <div class="stat"><b>01</b><small>Platform</small></div>
-  </div>
- </div>
 
+    <div class="stat">
+      <strong>24/7</strong>
+      <span>Platform Access</span>
+    </div>
 
- <div class="heroCard">
+    <div class="stat">
+      <strong>₹ INR</strong>
+      <span>Account Currency</span>
+    </div>
 
-  <div class="cardtop">
-   <span>Portfolio Overview</span>
-   <span>DEMO</span>
-  </div>
+    <div class="stat">
+      <strong>Secure</strong>
+      <span>Account Dashboard</span>
+    </div>
 
-  <div class="balance">
-   <small>Available Balance</small>
-   <h2>₹<span id="heroBalance">0</span></h2>
-   <span class="green">Account preview</span>
   </div>
 
-  <div class="chart">
-   <i class="bar b1"></i><i class="bar b2"></i><i class="bar b3"></i>
-   <i class="bar b4"></i><i class="bar b5"></i><i class="bar b6"></i>
-   <i class="bar b7"></i><i class="bar b8"></i><i class="bar b9"></i>
-  </div>
-
-  <div class="minirow">
-   <div class="mini">
-    <small>Games</small>
-    <b>6 Available</b>
-   </div>
-   <div class="mini">
-    <small>Account</small>
-    <b id="heroUser">Guest</b>
-   </div>
-  </div>
-
- </div>
-
+</div>
 </section>
 
 
-<section class="section">
+<!-- FEATURES -->
+<section id="features">
+<div class="container">
 
- <div class="title">
+<div class="section-title">
   <small>PLATFORM</small>
   <h2>Everything in one place</h2>
-  <p>Clean tools designed for the GoldPay experience.</p>
- </div>
+  <p>Simple tools designed for a clean digital finance experience.</p>
+</div>
 
- <div class="grid3">
+<div class="features">
 
-  <div class="card">
-   <div class="icon">📊</div>
-   <h3>Portfolio</h3>
-   <p>View your account balance and activity from one dashboard.</p>
+  <div class="feature">
+    <div class="icon">💰</div>
+    <h3>Account Balance</h3>
+    <p>View your available balance and account activity from one dashboard.</p>
   </div>
 
-  <div class="card">
-   <div class="icon">💳</div>
-   <h3>Transactions</h3>
-   <p>Keep deposits, withdrawals and other account activity organised.</p>
+  <div class="feature">
+    <div class="icon">⇅</div>
+    <h3>Transactions</h3>
+    <p>Keep track of deposits, withdrawals and account transactions.</p>
   </div>
 
-  <div class="card">
-   <div class="icon">🎮</div>
-   <h3>Gaming Hub</h3>
-   <p>Six independent games with different gameplay styles.</p>
+  <div class="feature">
+    <div class="icon">📊</div>
+    <h3>Analytics</h3>
+    <p>Understand your account activity with simple tracking tools.</p>
   </div>
 
- </div>
+  <div class="feature">
+    <div class="icon">🛡️</div>
+    <h3>Account Security</h3>
+    <p>Designed for a secure account-management workflow.</p>
+  </div>
+
+</div>
+</div>
 </section>
 
+
+<!-- CALCULATOR -->
+<section id="calculator">
+<div class="container">
+
+<div class="section-title">
+  <small>CALCULATOR</small>
+  <h2>Digital Asset Calculator</h2>
+  <p>Enter an amount and instantly calculate the displayed value.</p>
 </div>
 
+<div class="calculator">
 
-<!-- DASHBOARD -->
-<div id="dashboard" class="page hidden">
-
- <div class="dashboardHead">
-  <div>
-   <h1>Dashboard</h1>
-   <p class="muted">Welcome, <span id="dashName">Guest</span></p>
+  <div class="inputbox">
+    <label>Amount</label>
+    <input
+      id="amount"
+      type="number"
+      value="100"
+      min="0"
+      oninput="calculate()"
+    >
   </div>
-  <button class="btn gold" onclick="showPage('games')">Play Games</button>
- </div>
 
- <div class="balanceBox">
-  <small>AVAILABLE BALANCE</small>
-  <h2>₹<span id="dashBalance">0</span></h2>
-  <p class="muted">Demo account balance</p>
- </div>
+  <div class="inputbox">
+    <label>Rate (₹ per unit)</label>
+    <input
+      id="rate"
+      type="number"
+      value="90"
+      min="0"
+      oninput="calculate()"
+    >
+  </div>
 
- <div class="actionGrid">
-  <button class="action" onclick="deposit()">➕<br>Deposit</button>
-  <button class="action" onclick="withdraw()">↗️<br>Withdraw</button>
-  <button class="action" onclick="showPage('games')">🎮<br>Games</button>
-  <button class="action" onclick="showPage('profile')">👤<br>Profile</button>
- </div>
-
- <div class="transactions">
-  <h3>Recent Activity</h3>
-  <div id="txList"></div>
- </div>
+  <div class="result">
+    <small>Calculated Value</small>
+    <strong id="result">₹9,000.00</strong>
+  </div>
 
 </div>
+</div>
+</section>
 
 
-<!-- GAMES -->
-<div id="games" class="page hidden">
+<!-- HOW IT WORKS -->
+<section id="how">
+<div class="container">
 
- <div class="title">
-  <small>GOLDPAY ARENA</small>
-  <h2>Choose your game</h2>
-  <p>All games run locally in your browser.</p>
- </div>
-
- <div class="gameGrid">
-
-  <div class="gameCard">
-   <div class="gameIcon">🏎️</div>
-   <h3>GoldPay Racing</h3>
-   <p>Race against opponents and reach the finish first.</p>
-   <button class="play" onclick="startGame('racing')">PLAY</button>
-  </div>
-
-  <div class="gameCard">
-   <div class="gameIcon">🥊</div>
-   <h3>GoldPay Fight</h3>
-   <p>Attack, block and defeat your opponent.</p>
-   <button class="play" onclick="startGame('fight')">PLAY</button>
-  </div>
-
-  <div class="gameCard">
-   <div class="gameIcon">⚔️</div>
-   <h3>Battle Arena</h3>
-   <p>Fight enemies and survive the arena.</p>
-   <button class="play" onclick="startGame('battle')">PLAY</button>
-  </div>
-
-  <div class="gameCard">
-   <div class="gameIcon">🧟</div>
-   <h3>Zombie Survival</h3>
-   <p>Survive wave after wave of zombies.</p>
-   <button class="play" onclick="startGame('zombie')">PLAY</button>
-  </div>
-
-  <div class="gameCard">
-   <div class="gameIcon">🏰</div>
-   <h3>Tower Defense</h3>
-   <p>Upgrade your defence and stop enemies.</p>
-   <button class="play" onclick="startGame('tower')">PLAY</button>
-  </div>
-
-  <div class="gameCard">
-   <div class="gameIcon">🧩</div>
-   <h3>Cyber Puzzle</h3>
-   <p>Solve the puzzle before the timer ends.</p>
-   <button class="play" onclick="startGame('puzzle')">PLAY</button>
-  </div>
-
- </div>
+<div class="section-title">
+  <small>HOW IT WORKS</small>
+  <h2>Start in four steps</h2>
 </div>
 
+<div class="steps">
 
-<!-- GAME SCREEN -->
-<div id="gameScreen" class="page hidden">
-
- <div class="gameHeader">
-  <button class="btn dark" onclick="showPage('games')">← Games</button>
-  <h2 id="gameTitle">Game</h2>
- </div>
-
- <div class="gameBox">
-
-  <div class="gameStats">
-   <div>Score: <b id="gameScore">0</b></div>
-   <div>Level: <b id="gameLevel">1</b></div>
-   <div>HP: <b id="gameHp">100</b></div>
+  <div class="step">
+    <div class="number">01</div>
+    <h3>Create Account</h3>
+    <p>Register your GoldPay account through the signup screen.</p>
   </div>
 
-  <div id="gameContent"></div>
+  <div class="step">
+    <div class="number">02</div>
+    <h3>Open Dashboard</h3>
+    <p>Access your account balance and platform tools.</p>
+  </div>
 
-  <div class="gameButtons" id="gameButtons"></div>
+  <div class="step">
+    <div class="number">03</div>
+    <h3>Manage Activity</h3>
+    <p>Use the available account and transaction tools.</p>
+  </div>
 
- </div>
+  <div class="step">
+    <div class="number">04</div>
+    <h3>Track</h3>
+    <p>Review your activity and account information.</p>
+  </div>
 
 </div>
+</div>
+</section>
 
 
-<!-- LOGIN -->
-<div id="login" class="page hidden">
+<!-- DASHBOARD PREVIEW -->
+<section>
+<div class="container">
 
- <div class="formBox">
+<div class="section-title">
+  <small>APP PREVIEW</small>
+  <h2>GoldPay Dashboard</h2>
+  <p>A preview of the account interface.</p>
+</div>
 
-  <h1>Welcome back</h1>
-  <p>Login to your GoldPay account.</p>
+<div class="dashboard">
 
-  <input id="loginEmail" class="input" type="email" placeholder="Email">
-  <input id="loginPass" class="input" type="password" placeholder="Password">
+  <div class="dash-card">
 
-  <button class="btn gold full" onclick="login()">Login</button>
+    <small style="color:#888">AVAILABLE BALANCE</small>
 
-  <p style="text-align:center;margin-top:18px">
-   Don't have an account?
-   <span class="link" onclick="showPage('signup')">Create one</span>
+    <div class="balance" id="demoBalance">
+      ₹25,000.00
+    </div>
+
+    <span style="color:#777;font-size:13px">
+      Demo dashboard balance
+    </span>
+
+    <div class="actions">
+
+      <div class="action" onclick="showToast('Deposit screen selected')">
+        ➕<br>Deposit
+      </div>
+
+      <div class="action" onclick="showToast('Withdrawal screen selected')">
+        ↗<br>Withdraw
+      </div>
+
+      <div class="action" onclick="showToast('Transaction history selected')">
+        📋<br>History
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="dash-card">
+
+    <h3>Recent Activity</h3>
+
+    <div style="margin-top:22px">
+
+      <div style="display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid #222">
+        <span>Account Deposit</span>
+        <b style="color:#8dd36f">+₹5,000</b>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid #222">
+        <span>Service Payment</span>
+        <b style="color:#ff7777">-₹1,200</b>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;padding:13px 0">
+        <span>Reward Credit</span>
+        <b style="color:#8dd36f">+₹350</b>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+</div>
+</section>
+
+
+<!-- FAQ -->
+<section id="faq">
+<div class="container">
+
+<div class="section-title">
+  <small>FAQ</small>
+  <h2>Frequently Asked Questions</h2>
+</div>
+
+<div class="faq">
+
+<details>
+  <summary>What is GoldPay?</summary>
+  <p>
+    GoldPay is a digital platform interface for account,
+    transaction and financial-management features.
   </p>
+</details>
 
- </div>
-
-</div>
-
-
-<!-- SIGNUP -->
-<div id="signup" class="page hidden">
-
- <div class="formBox">
-
-  <h1>Create account</h1>
-  <p>Create your GoldPay demo account.</p>
-
-  <input id="signupName" class="input" placeholder="Full name">
-  <input id="signupEmail" class="input" type="email" placeholder="Email">
-  <input id="signupPass" class="input" type="password" placeholder="Password">
-
-  <button class="btn gold full" onclick="signup()">Create Account</button>
-
-  <p style="text-align:center;margin-top:18px">
-   Already have an account?
-   <span class="link" onclick="showPage('login')">Login</span>
+<details>
+  <summary>Is the calculator live?</summary>
+  <p>
+    The calculator on this demo page works instantly in your browser.
+    Its rate is currently entered manually.
   </p>
+</details>
 
- </div>
+<details>
+  <summary>Can I use GoldPay on mobile?</summary>
+  <p>
+    Yes. The interface is responsive and adapts to mobile,
+    tablet and desktop screens.
+  </p>
+</details>
 
-</div>
-
-
-<!-- PROFILE -->
-<div id="profile" class="page hidden">
-
- <div class="profile">
-
-  <div class="title">
-   <small>ACCOUNT</small>
-   <h2>My Profile</h2>
-  </div>
-
-  <div class="profileCard">
-
-   <div class="profileRow">
-    <span>Name</span>
-    <b id="profileName">Guest</b>
-   </div>
-
-   <div class="profileRow">
-    <span>Email</span>
-    <b id="profileEmail">Not logged in</b>
-   </div>
-
-   <div class="profileRow">
-    <span>Balance</span>
-    <b>₹<span id="profileBalance">0</span></b>
-   </div>
-
-   <button class="btn dark full" onclick="logout()">Logout</button>
-
-  </div>
-
- </div>
+<details>
+  <summary>Can real payments be connected?</summary>
+  <p>
+    Real payments require a properly configured payment gateway,
+    secure backend, authentication, transaction verification and
+    any applicable legal and regulatory requirements.
+  </p>
+</details>
 
 </div>
+</div>
+</section>
+
+</main>
 
 
 <footer>
- © 2026 GoldPay. Demo frontend.
+<div class="container">
+
+  <div class="footer-logo">
+    Gold<span>Pay</span>
+  </div>
+
+  <p>© 2026 GoldPay. All rights reserved.</p>
+
+  <div class="notice">
+    This website interface is a demonstration. Any real-money
+    financial service should be launched only after the required
+    legal, regulatory, KYC/AML, payment and security requirements
+    have been properly implemented.
+  </div>
+
+</div>
 </footer>
+
+
+<!-- LOGIN MODAL -->
+<div class="modal" id="loginModal">
+
+<div class="modalbox">
+
+  <div class="close" onclick="closeModals()">×</div>
+
+  <h2>Welcome Back</h2>
+  <p>Login to your GoldPay account.</p>
+
+  <div class="form">
+
+    <input id="loginEmail" type="email" placeholder="Email address">
+
+    <input id="loginPassword" type="password" placeholder="Password">
+
+    <button class="btn gold" onclick="login()">
+      Login
+    </button>
+
+  </div>
+
+</div>
+</div>
+
+
+<!-- SIGNUP MODAL -->
+<div class="modal" id="signupModal">
+
+<div class="modalbox">
+
+  <div class="close" onclick="closeModals()">×</div>
+
+  <h2>Create GoldPay Account</h2>
+  <p>Create a demo account to test the interface.</p>
+
+  <div class="form">
+
+    <input id="signupName" type="text" placeholder="Full name">
+
+    <input id="signupEmail" type="email" placeholder="Email address">
+
+    <input id="signupPassword" type="password" placeholder="Password">
+
+    <button class="btn gold" onclick="signup()">
+      Create Account
+    </button>
+
+  </div>
+
+</div>
+</div>
+
+
+<div class="toast" id="toast"></div>
 
 
 <script>
 
-/* =========================
-   ACCOUNT SYSTEM - DEMO
-========================= */
+/* MOBILE MENU */
 
-let account = JSON.parse(localStorage.getItem("goldpayAccount")) || null;
+function toggleMenu(){
 
-let balance = Number(localStorage.getItem("goldpayBalance") || 0);
-
-let transactions =
- JSON.parse(localStorage.getItem("goldpayTransactions")) || [];
-
-function save(){
-
- localStorage.setItem("goldpayBalance",balance);
- localStorage.setItem(
-  "goldpayTransactions",
-  JSON.stringify(transactions)
- );
+  document.getElementById("nav")
+    .classList.toggle("mobile-open");
 
 }
 
-function formatMoney(n){
- return Number(n).toLocaleString("en-IN");
-}
 
-function updateUI(){
+/* CALCULATOR */
 
- document.getElementById("heroBalance").textContent=formatMoney(balance);
- document.getElementById("dashBalance").textContent=formatMoney(balance);
- document.getElementById("profileBalance").textContent=formatMoney(balance);
+function calculate(){
 
- let name=account ? account.name : "Guest";
- let email=account ? account.email : "Not logged in";
+  let amount =
+    Number(document.getElementById("amount").value) || 0;
 
- document.getElementById("heroUser").textContent=name;
- document.getElementById("dashName").textContent=name;
- document.getElementById("profileName").textContent=name;
- document.getElementById("profileEmail").textContent=email;
+  let rate =
+    Number(document.getElementById("rate").value) || 0;
 
- let list=document.getElementById("txList");
+  let total = amount * rate;
 
- if(transactions.length===0){
-  list.innerHTML='<p class="muted" style="margin-top:15px">No transactions yet.</p>';
- }else{
-
-  list.innerHTML=transactions.slice().reverse().map(t=>`
-
-   <div class="tx">
-    <div>
-     <b>${t.title}</b>
-     <small>${t.date}</small>
-    </div>
-    <b class="${t.amount>=0?'green':''}">
-     ${t.amount>=0?'+':''}₹${formatMoney(Math.abs(t.amount))}
-    </b>
-   </div>
-
-  `).join("");
-
- }
+  document.getElementById("result").innerText =
+    "₹" + total.toLocaleString("en-IN",{
+      minimumFractionDigits:2,
+      maximumFractionDigits:2
+    });
 
 }
+
+calculate();
+
+
+/* MODALS */
+
+function openLogin(){
+
+  document.getElementById("loginModal")
+    .classList.add("active");
+
+}
+
+function openSignup(){
+
+  document.getElementById("signupModal")
+    .classList.add("active");
+
+}
+
+function closeModals(){
+
+  document.getElementById("loginModal")
+    .classList.remove("active");
+
+  document.getElementById("signupModal")
+    .classList.remove("active");
+
+}
+
+
+/* DEMO SIGNUP */
 
 function signup(){
 
- let name=document.getElementById("signupName").value.trim();
- let email=document.getElementById("signupEmail").value.trim();
- let pass=document.getElementById("signupPass").value;
+  let name =
+    document.getElementById("signupName").value.trim();
 
- if(!name || !email || !pass){
-  alert("Please fill all fields.");
-  return;
- }
+  let email =
+    document.getElementById("signupEmail").value.trim();
 
- account={name,email,pass};
+  let password =
+    document.getElementById("signupPassword").value;
 
- localStorage.setItem("goldpayAccount",JSON.stringify(account));
+  if(!name || !email || !password){
 
- alert("Account created successfully!");
+    showToast("Please fill all fields");
 
- updateUI();
- showPage("dashboard");
+    return;
+  }
+
+  localStorage.setItem(
+    "goldpay_user",
+    JSON.stringify({
+      name:name,
+      email:email
+    })
+  );
+
+  closeModals();
+
+  showToast("GoldPay account created");
+
 }
+
+
+/* DEMO LOGIN */
 
 function login(){
 
- let email=document.getElementById("loginEmail").value.trim();
- let pass=document.getElementById("loginPass").value;
+  let email =
+    document.getElementById("loginEmail").value.trim();
 
- let saved=JSON.parse(localStorage.getItem("goldpayAccount"));
+  let password =
+    document.getElementById("loginPassword").value;
 
- if(!saved){
-  alert("No account found. Please create an account first.");
-  return;
- }
+  if(!email || !password){
 
- if(email!==saved.email || pass!==saved.pass){
-  alert("Wrong email or password.");
-  return;
- }
+    showToast("Enter email and password");
 
- account=saved;
-
- alert("Login successful!");
-
- updateUI();
- showPage("dashboard");
-}
-
-function logout(){
-
- account=null;
-
- showPage("home");
- alert("Logged out.");
-}
-
-function deposit(){
-
- let amount=prompt("Demo deposit amount:");
-
- if(!amount)return;
-
- amount=Number(amount);
-
- if(!Number.isFinite(amount)||amount<=0){
-  alert("Enter a valid amount.");
-  return;
- }
-
- balance+=amount;
-
- transactions.push({
-  title:"Demo Deposit",
-  amount:amount,
-  date:new Date().toLocaleString()
- });
-
- save();
- updateUI();
-
- alert("Demo balance updated.");
-}
-
-function withdraw(){
-
- let amount=prompt("Demo withdrawal amount:");
-
- if(!amount)return;
-
- amount=Number(amount);
-
- if(!Number.isFinite(amount)||amount<=0){
-  alert("Enter a valid amount.");
-  return;
- }
-
- if(amount>balance){
-  alert("Insufficient demo balance.");
-  return;
- }
-
- balance-=amount;
-
- transactions.push({
-  title:"Demo Withdrawal",
-  amount:-amount,
-  date:new Date().toLocaleString()
- });
-
- save();
- updateUI();
-
- alert("Demo withdrawal recorded.");
-}
-
-
-/* =========================
-   PAGE NAVIGATION
-========================= */
-
-function showPage(id){
-
- document.querySelectorAll(".page").forEach(p=>{
-  p.classList.add("hidden");
- });
-
- document.getElementById(id).classList.remove("hidden");
-
- window.scrollTo({top:0,behavior:"smooth"});
-
- updateUI();
-}
-
-
-/* =========================
-   GAME ENGINE
-========================= */
-
-let currentGame="";
-let score=0;
-let level=1;
-let hp=100;
-let enemyHp=100;
-let timer=null;
-
-function startGame(game){
-
- currentGame=game;
- score=0;
- level=1;
- hp=100;
- enemyHp=100;
-
- showPage("gameScreen");
-
- document.getElementById("gameTitle").textContent=
-  gameName(game);
-
- updateGameStats();
-
- if(game==="racing") racing();
- if(game==="fight") fight();
- if(game==="battle") battle();
- if(game==="zombie") zombie();
- if(game==="tower") tower();
- if(game==="puzzle") puzzle();
-
-}
-
-function gameName(g){
-
- return {
-  racing:"🏎️ GoldPay Racing",
-  fight:"🥊 GoldPay Fight",
-  battle:"⚔️ Battle Arena",
-  zombie:"🧟 Zombie Survival",
-  tower:"🏰 Tower Defense",
-  puzzle:"🧩 Cyber Puzzle"
- }[g];
-
-}
-
-function updateGameStats(){
-
- document.getElementById("gameScore").textContent=score;
- document.getElementById("gameLevel").textContent=level;
- document.getElementById("gameHp").textContent=hp;
-
-}
-
-
-/* RACING */
-
-function racing(){
-
- clearInterval(timer);
-
- let progress=0;
- let opponent=0;
-
- document.getElementById("gameContent").innerHTML=`
-
-  <div style="font-size:55px;margin-top:30px">🏎️</div>
-
-  <h2 style="margin-top:20px">Race to 100!</h2>
-
-  <p class="muted" style="margin-top:8px">
-   Click accelerate. Your opponent is moving automatically.
-  </p>
-
-  <div style="margin:35px auto;max-width:600px">
-   <div style="background:#222;height:18px;border-radius:20px;overflow:hidden">
-    <div id="racePlayer"
-     style="height:100%;width:0;background:#d9a441"></div>
-   </div>
-
-   <div style="background:#222;height:18px;border-radius:20px;overflow:hidden;margin-top:12px">
-    <div id="raceEnemy"
-     style="height:100%;width:0;background:#777"></div>
-   </div>
-  </div>
-
- `;
-
- document.getElementById("gameButtons").innerHTML=`
-  <button onclick="accelerate()">🏎️ Accelerate</button>
- `;
-
- timer=setInterval(()=>{
-
-  opponent+=Math.random()*3;
-
-  document.getElementById("raceEnemy").style.width=
-   Math.min(opponent,100)+"%";
-
-  if(opponent>=100){
-
-   clearInterval(timer);
-
-   document.getElementById("gameContent").innerHTML+=
-    "<h3 style='color:#ff5d67;margin-top:20px'>You lost the race!</h3>";
-
+    return;
   }
 
- },700);
+  let user =
+    JSON.parse(localStorage.getItem("goldpay_user"));
 
-}
+  if(user && user.email === email){
 
-function accelerate(){
+    closeModals();
 
- let bar=document.getElementById("racePlayer");
-
- if(!bar)return;
-
- let current=parseFloat(bar.style.width)||0;
-
- current+=Math.random()*12+7;
-
- score+=10;
-
- bar.style.width=Math.min(current,100)+"%";
-
- updateGameStats();
-
- if(current>=100){
-
-  clearInterval(timer);
-
-  score+=100;
-
-  level++;
-
-  updateGameStats();
-
-  document.getElementById("gameContent").innerHTML+=
-   "<h3 style='color:#55d98b;margin-top:20px'>🏆 You won!</h3>";
-
-  document.getElementById("gameButtons").innerHTML=
-   `<button onclick="racing()">Play Again</button>`;
- }
-
-}
-
-
-/* FIGHT */
-
-function fight(){
-
- enemyHp=100;
- hp=100;
-
- document.getElementById("gameContent").innerHTML=`
-
-  <div class="arena">
-
-   <div class="hp hp1"><div id="playerHp"></div></div>
-   <div class="hp hp2"><div id="enemyHp"></div></div>
-
-   <div class="player">🥷</div>
-   <div class="enemy">🥊</div>
-
-  </div>
-
-  <p class="muted">Attack the opponent. Block reduces damage.</p>
- `;
-
- document.getElementById("gameButtons").innerHTML=`
-  <button onclick="attack()">👊 Punch</button>
-  <button onclick="kick()">🦵 Kick</button>
-  <button onclick="block()">🛡️ Block</button>
- `;
-
- updateFight();
-
-}
-
-function enemyAttack(blocked=false){
-
- let damage=Math.floor(Math.random()*12)+6;
-
- if(blocked)damage=Math.floor(damage/2);
-
- hp-=damage;
-
- if(hp<0)hp=0;
-
- updateFight();
-
-}
-
-function attack(){
-
- let damage=Math.floor(Math.random()*14)+8;
-
- enemyHp-=damage;
- score+=10;
-
- if(enemyHp<0)enemyHp=0;
-
- updateFight();
-
- if(enemyHp<=0){
-  winGame("🏆 You knocked out the opponent!");
-  return;
- }
-
- enemyAttack(false);
-
- if(hp<=0)loseGame();
-
-}
-
-function kick(){
-
- let damage=Math.floor(Math.random()*18)+5;
-
- enemyHp-=damage;
- score+=15;
-
- if(enemyHp<0)enemyHp=0;
-
- updateFight();
-
- if(enemyHp<=0){
-  winGame("🏆 Powerful kick! You won!");
-  return;
- }
-
- enemyAttack(false);
-
- if(hp<=0)loseGame();
-
-}
-
-function block(){
-
- score+=3;
-
- enemyAttack(true);
-
- if(hp<=0)loseGame();
-
-}
-
-function updateFight(){
-
- let p=document.getElementById("playerHp");
- let e=document.getElementById("enemyHp");
-
- if(p)p.style.width=hp+"%";
- if(e)e.style.width=enemyHp+"%";
-
- updateGameStats();
-
-}
-
-function winGame(msg){
-
- score+=100;
-
- updateGameStats();
-
- document.getElementById("gameContent").innerHTML+=
-  `<h2 style="color:#55d98b;margin-top:20px">${msg}</h2>`;
-
- document.getElementById("gameButtons").innerHTML=
-  `<button onclick="startGame('${currentGame}')">Play Again</button>`;
-
-}
-
-function loseGame(){
-
- document.getElementById("gameContent").innerHTML+=
-  `<h2 style="color:#ff5d67;margin-top:20px">💀 Game Over</h2>`;
-
- document.getElementById("gameButtons").innerHTML=
-  `<button onclick="startGame('${currentGame}')">Try Again</button>`;
-
-}
-
-
-/* BATTLE */
-
-function battle(){
-
- enemyHp=70+level*10;
-
- document.getElementById("gameContent").innerHTML=`
-
-  <div style="font-size:70px;margin-top:30px">⚔️</div>
-
-  <h2>Enemy HP: <span id="battleHp">${enemyHp}</span></h2>
-
-  <p class="muted">Defeat enemies to advance levels.</p>
-
- `;
-
- document.getElementById("gameButtons").innerHTML=`
-  <button onclick="battleAttack()">⚔️ Attack</button>
-  <button onclick="battleHeal()">❤️ Heal</button>
- `;
-
-}
-
-function battleAttack(){
-
- let damage=Math.floor(Math.random()*20)+10;
-
- enemyHp-=damage;
- score+=10;
-
- if(enemyHp<=0){
-
-  score+=75;
-  level++;
-
-  if(level>5){
-   winGame("🏆 Arena completed!");
-   return;
-  }
-
-  enemyHp=70+level*10;
-
-  alert("Enemy defeated! Level "+level);
-
- }
-
- let damageToPlayer=Math.floor(Math.random()*12)+4;
-
- hp-=damageToPlayer;
-
- if(hp<=0){
-  hp=0;
-  loseGame();
- }
-
- document.getElementById("battleHp").textContent=enemyHp;
-
- updateGameStats();
-
-}
-
-function battleHeal(){
-
- hp=Math.min(100,hp+18);
-
- updateGameStats();
-
-}
-
-
-/* ZOMBIE */
-
-function zombie(){
-
- let zombies=5+level*2;
-
- document.getElementById("gameContent").innerHTML=`
-
-  <div style="font-size:70px;margin-top:25px">🧟</div>
-
-  <h2>Zombies remaining: <span id="zombies">${zombies}</span></h2>
-
-  <p class="muted">Shoot the zombies before they reach you.</p>
-
- `;
-
- document.getElementById("gameButtons").innerHTML=`
-  <button onclick="shootZombie()">🔫 Shoot</button>
-  <button onclick="medkit()">❤️ Medkit</button>
- `;
-
- window.zombies=zombies;
-
-}
-
-function shootZombie(){
-
- let hits=Math.random();
-
- if(hits<.25){
-
-  hp-=15;
-  alert("A zombie hit you!");
-
- }else{
-
-  window.zombies--;
-  score+=15;
-
- }
-
- if(window.zombies<=0){
-
-  level++;
-
-  if(level>5){
-   winGame("🏆 You survived all waves!");
-   return;
-  }
-
-  zombie();
-  return;
-
- }
-
- if(hp<=0){
-  hp=0;
-  loseGame();
-  return;
- }
-
- document.getElementById("zombies").textContent=window.zombies;
-
- updateGameStats();
-
-}
-
-function medkit(){
-
- hp=Math.min(100,hp+20);
- updateGameStats();
-
-}
-
-
-/* TOWER DEFENSE */
-
-function tower(){
-
- let enemies=8;
-
- document.getElementById("gameContent").innerHTML=`
-
-  <div style="font-size:70px;margin-top:20px">🏰</div>
-
-  <h2>Enemies: <span id="towerEnemies">${enemies}</span></h2>
-
-  <p class="muted">
-   Build towers and attack enemies.
-  </p>
-
-  <div style="margin-top:25px;font-size:45px">
-   🏰 🗼 🗼
-  </div>
-
- `;
-
- document.getElementById("gameButtons").innerHTML=`
-  <button onclick="towerAttack()">🏹 Attack</button>
-  <button onclick="upgradeTower()">⬆️ Upgrade</button>
- `;
-
- window.towerEnemies=enemies;
- window.towerPower=20;
-
-}
-
-function towerAttack(){
-
- window.towerEnemies-=1;
- score+=12;
-
- if(Math.random()<.25){
-  hp-=8;
- }
-
- if(window.towerEnemies<=0){
-
-  level++;
-
-  if(level>5){
-   winGame("🏆 Base defended!");
-   return;
-  }
-
-  window.towerEnemies=8+level*2;
-
- }
-
- document.getElementById("towerEnemies").textContent=window.towerEnemies;
-
- if(hp<=0){
-  hp=0;
-  loseGame();
- }
-
- updateGameStats();
-
-}
-
-function upgradeTower(){
-
- window.towerPower+=10;
- score+=5;
-
- alert("Tower upgraded!");
-
- updateGameStats();
-
-}
-
-
-/* PUZZLE */
-
-function puzzle(){
-
- let a=Math.floor(Math.random()*30)+10;
- let b=Math.floor(Math.random()*20)+5;
-
- let answer=a+b;
-
- document.getElementById("gameContent").innerHTML=`
-
-  <div style="font-size:60px;margin-top:25px">🧩</div>
-
-  <h2 style="margin-top:15px">Solve this</h2>
-
-  <h1 style="color:#ffe39a;margin-top:20px">
-   ${a} + ${b} = ?
-  </h1>
-
-  <input id="puzzleAnswer"
-   class="input"
-   style="max-width:250px;text-align:center"
-   type="number"
-   placeholder="Answer">
-
- `;
-
- document.getElementById("gameButtons").innerHTML=`
-  <button onclick="checkPuzzle(${answer})">Submit</button>
- `;
-
-}
-
-function checkPuzzle(answer){
-
- let value=Number(document.getElementById("puzzleAnswer").value);
-
- if(value===answer){
-
-  score+=50;
-  level++;
-
-  if(level>5){
-
-   winGame("🧠🏆 Puzzle master!");
+    showToast("Login successful — Welcome " + user.name);
 
   }else{
 
-   alert("Correct! Next level.");
-   puzzle();
+    showToast(
+      "Demo account not found. Create an account first."
+    );
 
   }
-
- }else{
-
-  hp-=20;
-
-  if(hp<=0){
-
-   hp=0;
-   loseGame();
-
-  }else{
-
-   alert("Wrong answer!");
-
-  }
-
- }
-
- updateGameStats();
 
 }
 
 
-/* START */
+/* TOAST */
 
-updateUI();
-showPage("home");
+function showToast(message){
+
+  let toast =
+    document.getElementById("toast");
+
+  toast.innerText = message;
+
+  toast.classList.add("show");
+
+  setTimeout(function(){
+
+    toast.classList.remove("show");
+
+  },2500);
+
+}
+
+
+/* CLOSE MODAL WHEN CLICKING OUTSIDE */
+
+window.onclick = function(event){
+
+  if(event.target.classList.contains("modal")){
+
+    closeModals();
+
+  }
+
+};
 
 </script>
 
