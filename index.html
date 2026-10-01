@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GoldPay Dashboard</title>
+<title>GoldPay</title>
 
 <style>
 *{
@@ -13,22 +13,25 @@
   font-family:Arial,sans-serif;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   background:#050505;
   color:#fff;
 }
 
 header{
-  height:65px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 6%;
-  border-bottom:1px solid #292929;
-  background:#080808;
   position:sticky;
   top:0;
-  z-index:20;
+  z-index:100;
+  background:#080808;
+  border-bottom:1px solid #292929;
+  padding:15px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
 .logo{
@@ -37,37 +40,87 @@ header{
   font-weight:bold;
 }
 
-.menu{
+nav{
   display:flex;
-  gap:20px;
+  gap:16px;
 }
 
-.menu a{
+nav a{
   color:#ddd;
   text-decoration:none;
   cursor:pointer;
+  font-size:14px;
 }
 
-.menu a:hover{
+nav a:hover{
   color:#f5c542;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
 }
 
 .hero{
-  padding:55px 6% 30px;
+  min-height:78vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:40px 6%;
 }
 
 .hero h1{
-  font-size:38px;
+  font-size:60px;
   color:#f5c542;
-  margin-bottom:10px;
+  letter-spacing:3px;
+  margin-bottom:15px;
+}
+
+.hero h2{
+  font-size:25px;
+  margin-bottom:15px;
 }
 
 .hero p{
+  max-width:650px;
   color:#999;
+  line-height:1.7;
 }
 
-.dashboard{
-  padding:20px 6%;
+.btn{
+  border:1px solid #f5c542;
+  background:#f5c542;
+  color:#000;
+  padding:13px 22px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+  margin:8px 4px;
+}
+
+.btn.dark{
+  background:#101010;
+  color:#f5c542;
+}
+
+.btn:hover{
+  opacity:.85;
+}
+
+section{
+  padding:55px 6%;
+}
+
+.title{
+  text-align:center;
+  color:#f5c542;
+  font-size:30px;
+  margin-bottom:30px;
 }
 
 .cards{
@@ -80,59 +133,47 @@ header{
   background:#101010;
   border:1px solid #292929;
   border-radius:15px;
-  padding:24px;
+  padding:25px;
 }
 
 .card h3{
-  color:#aaa;
-  font-size:15px;
+  color:#f5c542;
   margin-bottom:12px;
 }
 
-.amount{
+.card p{
+  color:#999;
+  line-height:1.6;
+}
+
+.balance{
+  font-size:30px;
   color:#f5c542;
-  font-size:28px;
   font-weight:bold;
 }
 
-.section{
-  padding:50px 6%;
+.dashboard-top{
+  padding:40px 6% 10px;
 }
 
-.title{
+.dashboard-top h1{
   color:#f5c542;
-  font-size:28px;
-  margin-bottom:25px;
+  margin-bottom:8px;
+}
+
+.dashboard-top p{
+  color:#888;
 }
 
 .actions{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:15px;
-}
-
-.btn{
-  border:1px solid #f5c542;
-  background:#f5c542;
-  color:#000;
-  padding:14px;
-  border-radius:9px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.btn.dark{
-  background:#101010;
-  color:#f5c542;
-}
-
-.btn:hover{
-  opacity:.85;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:12px;
 }
 
 .game-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:18px;
 }
 
@@ -145,359 +186,793 @@ header{
 }
 
 .game-icon{
-  font-size:45px;
+  font-size:50px;
   margin-bottom:12px;
 }
 
 .game h3{
   color:#f5c542;
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
 
 .game p{
   color:#999;
-  font-size:14px;
   line-height:1.5;
-  margin-bottom:18px;
+  font-size:14px;
 }
 
-.login{
+.game-area{
+  display:none;
+  margin-top:30px;
+  background:#0b0b0b;
+  border:1px solid #333;
+  border-radius:15px;
+  padding:25px;
+  text-align:center;
+}
+
+.game-area.active{
+  display:block;
+}
+
+.game-score{
+  color:#f5c542;
+  font-size:25px;
+  margin:15px;
+}
+
+.login-box{
   max-width:420px;
   margin:auto;
   background:#101010;
-  padding:30px;
   border:1px solid #292929;
   border-radius:15px;
+  padding:30px;
 }
 
-input{
+input,select{
   width:100%;
   padding:14px;
-  margin-bottom:12px;
-  background:#050505;
+  margin:7px 0;
   border:1px solid #333;
-  color:white;
   border-radius:8px;
+  background:#050505;
+  color:#fff;
 }
 
 .message{
-  color:#f5c542;
   text-align:center;
-  margin-top:15px;
+  color:#f5c542;
+  margin-top:12px;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  z-index:200;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal.active{
+  display:flex;
+}
+
+.modal-box{
+  width:100%;
+  max-width:450px;
+  background:#111;
+  border:1px solid #f5c542;
+  border-radius:15px;
+  padding:25px;
+}
+
+.close{
+  float:right;
+  color:#f5c542;
+  cursor:pointer;
+  font-size:25px;
+}
+
+.admin-box{
+  background:#101010;
+  border:1px solid #292929;
+  padding:25px;
+  border-radius:15px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:20px;
+}
+
+th,td{
+  padding:12px;
+  border-bottom:1px solid #292929;
+  text-align:left;
+}
+
+th{
+  color:#f5c542;
 }
 
 footer{
-  margin-top:40px;
-  padding:30px;
   text-align:center;
-  color:#666;
+  padding:30px;
   border-top:1px solid #292929;
+  color:#666;
+  margin-top:40px;
 }
 
 @media(max-width:600px){
-  .menu{
-    gap:9px;
+
+  header{
+    padding:13px 4%;
   }
 
-  .menu a{
-    font-size:12px;
+  .logo{
+    font-size:20px;
+  }
+
+  nav{
+    gap:8px;
+  }
+
+  nav a{
+    font-size:11px;
   }
 
   .hero h1{
-    font-size:30px;
+    font-size:42px;
+  }
+
+  section{
+    padding:40px 5%;
   }
 }
 </style>
 </head>
 
+
 <body>
+
+
+<!-- HEADER -->
 
 <header>
 
   <div class="logo">GOLDPAY</div>
 
-  <div class="menu">
-    <a href="#dashboard">Dashboard</a>
-    <a href="#investment">Investment</a>
-    <a href="#games">Games</a>
-    <a href="#login">Login</a>
-  </div>
+  <nav>
+    <a onclick="showPage('home')">Home</a>
+    <a onclick="showPage('dashboard')">Dashboard</a>
+    <a onclick="showPage('games')">Games</a>
+    <a onclick="showPage('login')">Login</a>
+  </nav>
 
 </header>
 
 
-<!-- DASHBOARD -->
 
-<section class="hero" id="dashboard">
+<!-- HOME -->
 
-  <h1>Welcome to GoldPay</h1>
+<div id="home" class="page active">
 
-  <p>Your digital finance dashboard.</p>
+  <div class="hero">
 
-</section>
+    <h1>GOLDPAY</h1>
 
+    <h2>Digital Finance Platform</h2>
 
-<section class="dashboard">
+    <p>
+      Welcome to GoldPay. Explore the dashboard,
+      investment interface and interactive games.
+    </p>
 
-  <div class="cards">
+    <div>
+      <button class="btn" onclick="showPage('login')">
+        LOGIN
+      </button>
 
-    <div class="card">
-      <h3>Available Balance</h3>
-      <div class="amount">₹0.00</div>
-    </div>
+      <button class="btn dark" onclick="showPage('dashboard')">
+        DASHBOARD
+      </button>
 
-    <div class="card">
-      <h3>Total Investment</h3>
-      <div class="amount">₹0.00</div>
-    </div>
-
-    <div class="card">
-      <h3>Total Earnings</h3>
-      <div class="amount">₹0.00</div>
-    </div>
-
-    <div class="card">
-      <h3>Game Points</h3>
-      <div class="amount">0</div>
+      <button class="btn dark" onclick="showPage('games')">
+        PLAY GAMES
+      </button>
     </div>
 
   </div>
 
-</section>
 
+  <section>
 
-<!-- ACTIONS -->
+    <h2 class="title">GoldPay Features</h2>
 
-<section class="section">
+    <div class="cards">
 
-  <h2 class="title">Quick Actions</h2>
+      <div class="card">
+        <h3>💰 Investment</h3>
+        <p>
+          Modern investment dashboard interface.
+        </p>
+      </div>
 
-  <div class="actions">
+      <div class="card">
+        <h3>🔐 Account</h3>
+        <p>
+          User account and authentication interface.
+        </p>
+      </div>
 
-    <button class="btn" onclick="demoMessage('Deposit')">
-      💳 Deposit
-    </button>
+      <div class="card">
+        <h3>🎮 Games</h3>
+        <p>
+          Six interactive games with different gameplay.
+        </p>
+      </div>
 
-    <button class="btn dark" onclick="demoMessage('Withdraw')">
-      💸 Withdraw
-    </button>
-
-    <button class="btn dark" onclick="demoMessage('Transaction History')">
-      📊 Transactions
-    </button>
-
-    <button class="btn dark" onclick="demoMessage('Profile')">
-      👤 Profile
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- INVESTMENT -->
-
-<section class="section" id="investment">
-
-  <h2 class="title">Investment Plans</h2>
-
-  <div class="cards">
-
-    <div class="card">
-
-      <h3>Starter</h3>
-
-      <p>
-        Demo investment plan for testing the interface.
-      </p>
-
-      <button class="btn" onclick="demoMessage('Starter Plan')">
-        View Plan
-      </button>
+      <div class="card">
+        <h3>📊 Dashboard</h3>
+        <p>
+          Balance, transactions and account information.
+        </p>
+      </div>
 
     </div>
 
+  </section>
 
-    <div class="card">
+</div>
 
-      <h3>Growth</h3>
-
-      <p>
-        Demo plan. Actual investment terms will require
-        proper backend and regulatory setup.
-      </p>
-
-      <button class="btn" onclick="demoMessage('Growth Plan')">
-        View Plan
-      </button>
-
-    </div>
-
-
-    <div class="card">
-
-      <h3>Premium</h3>
-
-      <p>
-        Demo interface only. No guaranteed returns are
-        displayed.
-      </p>
-
-      <button class="btn" onclick="demoMessage('Premium Plan')">
-        View Plan
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- GAMES -->
-
-<section class="section" id="games">
-
-  <h2 class="title">GoldPay Games</h2>
-
-  <div class="game-grid">
-
-
-    <div class="game">
-
-      <div class="game-icon">🏎️</div>
-
-      <h3>GoldPay Racing</h3>
-
-      <p>
-        Race through different tracks and levels.
-      </p>
-
-      <button class="btn" onclick="playGame('GoldPay Racing')">
-        PLAY
-      </button>
-
-    </div>
-
-
-    <div class="game">
-
-      <div class="game-icon">🥊</div>
-
-      <h3>GoldPay Fight</h3>
-
-      <p>
-        Original 1 vs 1 fighting game.
-      </p>
-
-      <button class="btn" onclick="playGame('GoldPay Fight')">
-        PLAY
-      </button>
-
-    </div>
-
-
-    <div class="game">
-
-      <div class="game-icon">⚔️</div>
-
-      <h3>Battle Arena</h3>
-
-      <p>
-        Defeat enemies and complete levels.
-      </p>
-
-      <button class="btn" onclick="playGame('Battle Arena')">
-        PLAY
-      </button>
-
-    </div>
-
-
-    <div class="game">
-
-      <div class="game-icon">🧟</div>
-
-      <h3>Zombie Survival</h3>
-
-      <p>
-        Survive increasingly difficult waves.
-      </p>
-
-      <button class="btn" onclick="playGame('Zombie Survival')">
-        PLAY
-      </button>
-
-    </div>
-
-
-    <div class="game">
-
-      <div class="game-icon">🏰</div>
-
-      <h3>Tower Defense</h3>
-
-      <p>
-        Defend your base and upgrade towers.
-      </p>
-
-      <button class="btn" onclick="playGame('Tower Defense')">
-        PLAY
-      </button>
-
-    </div>
-
-
-    <div class="game">
-
-      <div class="game-icon">🧩</div>
-
-      <h3>Cyber Puzzle</h3>
-
-      <p>
-        Solve difficult puzzles before time runs out.
-      </p>
-
-      <button class="btn" onclick="playGame('Cyber Puzzle')">
-        PLAY
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
 
 
 <!-- LOGIN -->
 
-<section class="section" id="login">
+<div id="login" class="page">
 
-  <h2 class="title">User Login</h2>
+  <section>
 
-  <div class="login">
+    <h2 class="title">GoldPay Login</h2>
 
-    <input
-      type="text"
-      id="username"
-      placeholder="Username"
-    >
+    <div class="login-box">
 
-    <input
-      type="password"
-      id="password"
-      placeholder="Password"
-    >
+      <input
+        type="text"
+        id="loginUsername"
+        placeholder="Username"
+      >
 
-    <button class="btn" onclick="loginUser()">
-      LOGIN
-    </button>
+      <input
+        type="password"
+        id="loginPassword"
+        placeholder="Password"
+      >
 
-    <div class="message" id="message"></div>
+      <button class="btn" style="width:100%"
+        onclick="loginUser()">
+        LOGIN
+      </button>
+
+      <button class="btn dark" style="width:100%"
+        onclick="showPage('register')">
+        CREATE ACCOUNT
+      </button>
+
+      <div id="loginMessage" class="message"></div>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+
+<!-- REGISTER -->
+
+<div id="register" class="page">
+
+  <section>
+
+    <h2 class="title">Create GoldPay Account</h2>
+
+    <div class="login-box">
+
+      <input
+        type="text"
+        id="regName"
+        placeholder="Full Name"
+      >
+
+      <input
+        type="text"
+        id="regUsername"
+        placeholder="Username"
+      >
+
+      <input
+        type="email"
+        id="regEmail"
+        placeholder="Email"
+      >
+
+      <input
+        type="password"
+        id="regPassword"
+        placeholder="Password"
+      >
+
+      <button class="btn"
+        style="width:100%"
+        onclick="registerUser()">
+        CREATE ACCOUNT
+      </button>
+
+      <div id="registerMessage" class="message"></div>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+
+<!-- DASHBOARD -->
+
+<div id="dashboard" class="page">
+
+  <div class="dashboard-top">
+
+    <h1>Welcome, <span id="userDisplay">Guest</span></h1>
+
+    <p>Your GoldPay dashboard</p>
 
   </div>
 
-</section>
+
+  <section>
+
+    <div class="cards">
+
+      <div class="card">
+
+        <h3>Available Balance</h3>
+
+        <div class="balance">
+          ₹<span id="balance">0.00</span>
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3>Total Investment</h3>
+
+        <div class="balance">
+          ₹<span id="investmentBalance">0.00</span>
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3>Total Earnings</h3>
+
+        <div class="balance">
+          ₹<span id="earnings">0.00</span>
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3>Game Points</h3>
+
+        <div class="balance">
+          <span id="points">0</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section>
+
+    <h2 class="title">Quick Actions</h2>
+
+    <div class="actions">
+
+      <button class="btn"
+        onclick="openModal('depositModal')">
+        💳 DEPOSIT
+      </button>
+
+      <button class="btn dark"
+        onclick="openModal('withdrawModal')">
+        💸 WITHDRAW
+      </button>
+
+      <button class="btn dark"
+        onclick="showTransactions()">
+        📊 TRANSACTIONS
+      </button>
+
+      <button class="btn dark"
+        onclick="showProfile()">
+        👤 PROFILE
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <section>
+
+    <h2 class="title">Investment</h2>
+
+    <div class="cards">
+
+      <div class="card">
+
+        <h3>Starter</h3>
+
+        <p>
+          Demo investment interface.
+        </p>
+
+        <button class="btn"
+          onclick="selectPlan('Starter')">
+          SELECT
+        </button>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3>Growth</h3>
+
+        <p>
+          Demo plan. Actual terms will be configured
+          only after proper regulatory and backend setup.
+        </p>
+
+        <button class="btn"
+          onclick="selectPlan('Growth')">
+          SELECT
+        </button>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3>Premium</h3>
+
+        <p>
+          Demo interface without guaranteed returns.
+        </p>
+
+        <button class="btn"
+          onclick="selectPlan('Premium')">
+          SELECT
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+
+<!-- GAMES -->
+
+<div id="games" class="page">
+
+  <section>
+
+    <h2 class="title">GoldPay Games</h2>
+
+    <div class="game-grid">
+
+
+      <!-- RACING -->
+
+      <div class="game">
+
+        <div class="game-icon">🏎️</div>
+
+        <h3>GoldPay Racing</h3>
+
+        <p>
+          Move your car and avoid obstacles.
+        </p>
+
+        <button class="btn"
+          onclick="openGame('racing')">
+          PLAY
+        </button>
+
+      </div>
+
+
+      <!-- FIGHT -->
+
+      <div class="game">
+
+        <div class="game-icon">🥊</div>
+
+        <h3>GoldPay Fight</h3>
+
+        <p>
+          Attack, block and defeat your opponent.
+        </p>
+
+        <button class="btn"
+          onclick="openGame('fight')">
+          PLAY
+        </button>
+
+      </div>
+
+
+      <!-- BATTLE -->
+
+      <div class="game">
+
+        <div class="game-icon">⚔️</div>
+
+        <h3>Battle Arena</h3>
+
+        <p>
+          Defeat enemies to increase your score.
+        </p>
+
+        <button class="btn"
+          onclick="openGame('battle')">
+          PLAY
+        </button>
+
+      </div>
+
+
+      <!-- ZOMBIE -->
+
+      <div class="game">
+
+        <div class="game-icon">🧟</div>
+
+        <h3>Zombie Survival</h3>
+
+        <p>
+          Survive as many zombie waves as possible.
+        </p>
+
+        <button class="btn"
+          onclick="openGame('zombie')">
+          PLAY
+        </button>
+
+      </div>
+
+
+      <!-- TOWER -->
+
+      <div class="game">
+
+        <div class="game-icon">🏰</div>
+
+        <h3>Tower Defense</h3>
+
+        <p>
+          Defend your base against incoming enemies.
+        </p>
+
+        <button class="btn"
+          onclick="openGame('tower')">
+          PLAY
+        </button>
+
+      </div>
+
+
+      <!-- PUZZLE -->
+
+      <div class="game">
+
+        <div class="game-icon">🧩</div>
+
+        <h3>Cyber Puzzle</h3>
+
+        <p>
+          Solve the puzzle before time runs out.
+        </p>
+
+        <button class="btn"
+          onclick="openGame('puzzle')">
+          PLAY
+        </button>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- GAME AREA -->
+
+    <div id="gameArea" class="game-area">
+
+      <h2 id="gameTitle"></h2>
+
+      <div class="game-score">
+        Score: <span id="gameScore">0</span>
+      </div>
+
+      <div id="gameContent"></div>
+
+      <button class="btn dark"
+        onclick="closeGame()">
+        EXIT GAME
+      </button>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+
+<!-- ADMIN -->
+
+<div id="admin" class="page">
+
+  <section>
+
+    <h2 class="title">Admin Panel</h2>
+
+    <div class="admin-box">
+
+      <h3 style="color:#f5c542">
+        GoldPay Control Center
+      </h3>
+
+      <br>
+
+      <p style="color:#999">
+        Demo admin interface. Secure server-side
+        authentication must be added before real use.
+      </p>
+
+      <table>
+
+        <tr>
+          <th>Section</th>
+          <th>Status</th>
+        </tr>
+
+        <tr>
+          <td>Users</td>
+          <td>Demo</td>
+        </tr>
+
+        <tr>
+          <td>Transactions</td>
+          <td>Demo</td>
+        </tr>
+
+        <tr>
+          <td>Investments</td>
+          <td>Demo</td>
+        </tr>
+
+        <tr>
+          <td>Games</td>
+          <td>Active</td>
+        </tr>
+
+      </table>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+
+<!-- DEPOSIT MODAL -->
+
+<div id="depositModal" class="modal">
+
+  <div class="modal-box">
+
+    <span class="close"
+      onclick="closeModal('depositModal')">
+      ×
+    </span>
+
+    <h2 style="color:#f5c542">
+      Deposit
+    </h2>
+
+    <br>
+
+    <p style="color:#999">
+      Demo only. Payment gateway is not connected.
+    </p>
+
+    <input
+      type="number"
+      id="depositAmount"
+      placeholder="Enter amount"
+    >
+
+    <button class="btn"
+      onclick="demoDeposit()">
+      CONTINUE
+    </button>
+
+  </div>
+
+</div>
+
+
+
+<!-- WITHDRAW MODAL -->
+
+<div id="withdrawModal" class="modal">
+
+  <div class="modal-box">
+
+    <span class="close"
+      onclick="closeModal('withdrawModal')">
+      ×
+    </span>
+
+    <h2 style="color:#f5c542">
+      Withdraw
+    </h2>
+
+    <br>
+
+    <p style="color:#999">
+      Demo only. Withdrawal system is not connected.
+    </p>
+
+    <input
+      type="number"
+      id="withdrawAmount"
+      placeholder="Enter amount"
+    >
+
+    <button class="btn"
+      onclick="demoWithdraw()">
+      CONTINUE
+    </button>
+
+  </div>
+
+</div>
+
 
 
 <footer>
@@ -507,54 +982,801 @@ footer{
 </footer>
 
 
+
 <script>
 
-function demoMessage(name){
+/* USER DATA */
 
-  alert(
-    name +
-    " section selected. Secure backend will be connected later."
+let currentUser =
+  localStorage.getItem("goldpayUser") || "Guest";
+
+let gamePoints =
+  Number(localStorage.getItem("goldpayPoints") || 0);
+
+document.getElementById("userDisplay").innerText =
+  currentUser;
+
+document.getElementById("points").innerText =
+  gamePoints;
+
+
+
+/* PAGE SYSTEM */
+
+function showPage(page){
+
+  document.querySelectorAll(".page")
+    .forEach(function(p){
+      p.classList.remove("active");
+    });
+
+  let selected =
+    document.getElementById(page);
+
+  if(selected){
+    selected.classList.add("active");
+  }
+
+  window.scrollTo(0,0);
+}
+
+
+
+/* REGISTER */
+
+function registerUser(){
+
+  let name =
+    document.getElementById("regName").value;
+
+  let username =
+    document.getElementById("regUsername").value;
+
+  let email =
+    document.getElementById("regEmail").value;
+
+  let password =
+    document.getElementById("regPassword").value;
+
+  let message =
+    document.getElementById("registerMessage");
+
+
+  if(
+    name === "" ||
+    username === "" ||
+    email === "" ||
+    password === ""
+  ){
+
+    message.innerText =
+      "Please fill all fields.";
+
+    return;
+  }
+
+
+  localStorage.setItem(
+    "goldpayUser",
+    username
   );
+
+  message.innerText =
+    "Account created. You can login now.";
 
 }
 
 
-function playGame(name){
 
-  alert(
-    name +
-    " selected. The full playable version will be built next."
-  );
-
-}
-
+/* LOGIN */
 
 function loginUser(){
 
   let username =
-    document.getElementById("username").value;
+    document.getElementById("loginUsername").value;
 
   let password =
-    document.getElementById("password").value;
+    document.getElementById("loginPassword").value;
 
   let message =
-    document.getElementById("message");
+    document.getElementById("loginMessage");
 
 
   if(username === "" || password === ""){
 
     message.innerText =
-      "Please enter username and password.";
+      "Enter username and password.";
 
     return;
+  }
+
+
+  localStorage.setItem(
+    "goldpayUser",
+    username
+  );
+
+  currentUser = username;
+
+  document.getElementById("userDisplay").innerText =
+    username;
+
+  message.innerText =
+    "Login successful.";
+
+  setTimeout(function(){
+    showPage("dashboard");
+  },700);
+
+}
+
+
+
+/* MODALS */
+
+function openModal(id){
+
+  document
+    .getElementById(id)
+    .classList.add("active");
+
+}
+
+function closeModal(id){
+
+  document
+    .getElementById(id)
+    .classList.remove("active");
+
+}
+
+
+
+/* DEPOSIT */
+
+function demoDeposit(){
+
+  let amount =
+    document.getElementById("depositAmount").value;
+
+  if(amount === "" || Number(amount) <= 0){
+
+    alert("Enter a valid amount.");
+
+    return;
+  }
+
+  alert(
+    "Demo deposit request: ₹" +
+    amount +
+    "\nPayment gateway will be connected later."
+  );
+
+  closeModal("depositModal");
+
+}
+
+
+
+/* WITHDRAW */
+
+function demoWithdraw(){
+
+  let amount =
+    document.getElementById("withdrawAmount").value;
+
+  if(amount === "" || Number(amount) <= 0){
+
+    alert("Enter a valid amount.");
+
+    return;
+  }
+
+  alert(
+    "Demo withdrawal request: ₹" +
+    amount +
+    "\nSecure withdrawal system will be connected later."
+  );
+
+  closeModal("withdrawModal");
+
+}
+
+
+
+/* INVESTMENT */
+
+function selectPlan(plan){
+
+  alert(
+    plan +
+    " plan selected.\n\nThis is currently a demo interface."
+  );
+
+}
+
+
+
+/* PROFILE */
+
+function showProfile(){
+
+  alert(
+    "Username: " +
+    currentUser +
+    "\nGame Points: " +
+    gamePoints
+  );
+
+}
+
+
+
+/* TRANSACTIONS */
+
+function showTransactions(){
+
+  alert(
+    "Transaction History\n\nNo transactions yet."
+  );
+
+}
+
+
+
+/* GAME SYSTEM */
+
+let currentGame = "";
+
+let score = 0;
+
+let gameTimer = null;
+
+
+function openGame(game){
+
+  currentGame = game;
+
+  score = 0;
+
+  document.getElementById("gameScore").innerText =
+    score;
+
+  document.getElementById("gameArea")
+    .classList.add("active");
+
+  let title =
+    document.getElementById("gameTitle");
+
+  let content =
+    document.getElementById("gameContent");
+
+
+  if(game === "racing"){
+
+    title.innerText =
+      "🏎️ GoldPay Racing";
+
+    startRacing(content);
 
   }
 
 
-  message.innerText =
-    "Demo login successful for " + username;
+  if(game === "fight"){
+
+    title.innerText =
+      "🥊 GoldPay Fight";
+
+    startFight(content);
+
+  }
+
+
+  if(game === "battle"){
+
+    title.innerText =
+      "⚔️ Battle Arena";
+
+    startBattle(content);
+
+  }
+
+
+  if(game === "zombie"){
+
+    title.innerText =
+      "🧟 Zombie Survival";
+
+    startZombie(content);
+
+  }
+
+
+  if(game === "tower"){
+
+    title.innerText =
+      "🏰 Tower Defense";
+
+    startTower(content);
+
+  }
+
+
+  if(game === "puzzle"){
+
+    title.innerText =
+      "🧩 Cyber Puzzle";
+
+    startPuzzle(content);
+
+  }
 
 }
+
+
+
+/* RACING */
+
+function startRacing(content){
+
+  let position = 0;
+
+  content.innerHTML = `
+
+    <p style="color:#999">
+      Tap MOVE repeatedly to race.
+    </p>
+
+    <div style="
+      font-size:60px;
+      margin:25px;
+    " id="car">
+      🏎️
+    </div>
+
+    <button class="btn"
+      onclick="moveCar()">
+      MOVE
+    </button>
+
+    <div id="raceMessage"
+      style="color:#f5c542;margin:15px">
+      Distance: 0
+    </div>
+
+  `;
+
+  window.carPosition = 0;
+
+}
+
+
+function moveCar(){
+
+  window.carPosition += 10;
+
+  score += 5;
+
+  document.getElementById("gameScore").innerText =
+    score;
+
+  document.getElementById("raceMessage").innerText =
+    "Distance: " + window.carPosition;
+
+
+  if(window.carPosition >= 100){
+
+    addPoints(20);
+
+    alert("🏁 Race completed! +20 points");
+
+    window.carPosition = 0;
+
+  }
+
+}
+
+
+
+/* FIGHT */
+
+function startFight(content){
+
+  window.enemyHealth = 100;
+
+  content.innerHTML = `
+
+    <h3 style="color:#f5c542">
+      Enemy Health:
+      <span id="enemyHealth">100</span>
+    </h3>
+
+    <br>
+
+    <button class="btn"
+      onclick="fightAttack()">
+      👊 ATTACK
+    </button>
+
+    <button class="btn dark"
+      onclick="fightBlock()">
+      🛡️ BLOCK
+    </button>
+
+    <p id="fightMessage"
+      style="color:#999;margin-top:20px">
+      Defeat the opponent!
+    </p>
+
+  `;
+
+}
+
+
+function fightAttack(){
+
+  let damage =
+    Math.floor(Math.random()*20)+10;
+
+  window.enemyHealth -= damage;
+
+  score += damage;
+
+  document.getElementById("gameScore").innerText =
+    score;
+
+  document.getElementById("enemyHealth").innerText =
+    Math.max(0,window.enemyHealth);
+
+
+  if(window.enemyHealth <= 0){
+
+    addPoints(30);
+
+    alert("🥊 Victory! +30 points");
+
+    window.enemyHealth = 100;
+
+    document.getElementById("enemyHealth").innerText =
+      100;
+
+  }
+
+}
+
+
+function fightBlock(){
+
+  document.getElementById("fightMessage").innerText =
+    "🛡️ You blocked the attack!";
+
+}
+
+
+
+/* BATTLE */
+
+function startBattle(content){
+
+  window.enemyHP = 100;
+
+  content.innerHTML = `
+
+    <p style="color:#999">
+      Defeat the enemy.
+    </p>
+
+    <h3 style="color:#f5c542;margin:15px">
+      Enemy HP:
+      <span id="battleHP">100</span>
+    </h3>
+
+    <button class="btn"
+      onclick="battleAttack()">
+      ⚔️ ATTACK
+    </button>
+
+  `;
+
+}
+
+
+function battleAttack(){
+
+  let damage =
+    Math.floor(Math.random()*25)+5;
+
+  window.enemyHP -= damage;
+
+  score += 10;
+
+  document.getElementById("gameScore").innerText =
+    score;
+
+  document.getElementById("battleHP").innerText =
+    Math.max(0,window.enemyHP);
+
+
+  if(window.enemyHP <= 0){
+
+    addPoints(25);
+
+    alert("⚔️ Enemy defeated! +25 points");
+
+    window.enemyHP = 100;
+
+    document.getElementById("battleHP").innerText =
+      100;
+
+  }
+
+}
+
+
+
+/* ZOMBIE */
+
+function startZombie(content){
+
+  window.zombieHealth = 100;
+
+  window.wave = 1;
+
+  content.innerHTML = `
+
+    <h3 style="color:#f5c542">
+      Wave:
+      <span id="wave">1</span>
+    </h3>
+
+    <h3 style="margin:15px">
+      Health:
+      <span id="zHealth">100</span>
+    </h3>
+
+    <button class="btn"
+      onclick="shootZombie()">
+      🔫 SHOOT
+    </button>
+
+    <button class="btn dark"
+      onclick="healPlayer()">
+      ❤️ HEAL
+    </button>
+
+    <p id="zMessage"
+      style="color:#999;margin-top:15px">
+      Survive the waves!
+    </p>
+
+  `;
+
+}
+
+
+function shootZombie(){
+
+  let damage =
+    Math.floor(Math.random()*20)+10;
+
+  score += 10;
+
+  document.getElementById("gameScore").innerText =
+    score;
+
+  window.wave++;
+
+  document.getElementById("wave").innerText =
+    window.wave;
+
+
+  if(window.wave >= 10){
+
+    addPoints(40);
+
+    alert("🧟 Survival completed! +40 points");
+
+    window.wave = 1;
+
+  }
+
+}
+
+
+function healPlayer(){
+
+  document.getElementById("zMessage").innerText =
+    "❤️ Health restored!";
+}
+
+
+
+/* TOWER DEFENSE */
+
+function startTower(content){
+
+  window.baseHealth = 100;
+
+  window.enemyWave = 1;
+
+  content.innerHTML = `
+
+    <h3 style="color:#f5c542">
+      Base Health:
+      <span id="baseHealth">100</span>
+    </h3>
+
+    <p style="color:#999;margin:15px">
+      Build towers to stop enemies.
+    </p>
+
+    <button class="btn"
+      onclick="buildTower()">
+      🏰 BUILD TOWER
+    </button>
+
+    <p id="towerMessage"
+      style="color:#999;margin-top:15px">
+      Enemy wave: 1
+    </p>
+
+  `;
+
+}
+
+
+function buildTower(){
+
+  score += 15;
+
+  document.getElementById("gameScore").innerText =
+    score;
+
+  window.enemyWave++;
+
+  document.getElementById("towerMessage").innerText =
+    "Tower built! Enemy wave: " +
+    window.enemyWave;
+
+
+  if(window.enemyWave >= 8){
+
+    addPoints(35);
+
+    alert("🏰 Base defended! +35 points");
+
+    window.enemyWave = 1;
+
+  }
+
+}
+
+
+
+/* PUZZLE */
+
+function startPuzzle(content){
+
+  let a =
+    Math.floor(Math.random()*20)+1;
+
+  let b =
+    Math.floor(Math.random()*20)+1;
+
+  window.answer = a+b;
+
+  content.innerHTML = `
+
+    <h3 style="color:#f5c542">
+      Solve:
+      ${a} + ${b} = ?
+    </h3>
+
+    <input
+      id="puzzleAnswer"
+      type="number"
+      placeholder="Your answer"
+      style="max-width:250px"
+    >
+
+    <br>
+
+    <button class="btn"
+      onclick="checkPuzzle()">
+      SUBMIT
+    </button>
+
+    <p id="puzzleMessage"
+      style="margin-top:15px;color:#999">
+    </p>
+
+  `;
+
+}
+
+
+function checkPuzzle(){
+
+  let answer =
+    Number(
+      document.getElementById("puzzleAnswer").value
+    );
+
+  let message =
+    document.getElementById("puzzleMessage");
+
+
+  if(answer === window.answer){
+
+    score += 20;
+
+    document.getElementById("gameScore").innerText =
+      score;
+
+    addPoints(10);
+
+    message.innerText =
+      "✅ Correct! +10 game points.";
+
+    setTimeout(function(){
+
+      startPuzzle(
+        document.getElementById("gameContent")
+      );
+
+    },800);
+
+  }else{
+
+    message.innerText =
+      "❌ Wrong answer. Try again.";
+
+  }
+
+}
+
+
+
+/* POINT SYSTEM */
+
+function addPoints(value){
+
+  gamePoints += value;
+
+  localStorage.setItem(
+    "goldpayPoints",
+    gamePoints
+  );
+
+  document.getElementById("points").innerText =
+    gamePoints;
+
+}
+
+
+
+/* CLOSE GAME */
+
+function closeGame(){
+
+  if(gameTimer){
+
+    clearInterval(gameTimer);
+
+    gameTimer = null;
+
+  }
+
+  document.getElementById("gameArea")
+    .classList.remove("active");
+
+}
+
+
+
+/* START */
+
+showPage("home");
 
 </script>
 
